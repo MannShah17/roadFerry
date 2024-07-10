@@ -380,7 +380,7 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Day Plans</label>
                 <div class="col-sm-10" id="dayPlans">
                   <div class="input-group mb-2">
@@ -403,6 +403,21 @@
                   <button
                     type="button"
                     class="btn btn-secondary"
+                    onclick="addDayPlan()"
+                  >
+                    Add Day Plan
+                  </button>
+                </div>
+              </div> -->
+
+              <div class="form-group row">
+                <label for="dayPlans" class="col-sm-2 col-form-label"
+                  >Day Plans</label
+                >
+                <div class="col-sm-10" id="dayPlansContainer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
                     onclick="addDayPlan()"
                   >
                     Add Day Plan
@@ -524,17 +539,26 @@
     }
   }
 
+  // function addDayPlan() {
+  //   const dayPlansDiv = document.getElementById('dayPlans');
+  //   const newInputGroup = document.createElement('div');
+  //   newInputGroup.className = 'input-group mb-2';
+  //   newInputGroup.innerHTML = `
+  //       <input class="form-control" type="text" name="dayPlans[]" placeholder="Enter a day plan" />
+  //       <div class="input-group-append">
+  //         <button type="button" class="btn btn-danger" onclick="removePlan(this)">Delete</button>
+  //       </div>
+  //     `;
+  //   dayPlansDiv.insertBefore(newInputGroup, dayPlansDiv.lastElementChild);
+  // }
   function addDayPlan() {
-    const dayPlansDiv = document.getElementById('dayPlans');
-    const newInputGroup = document.createElement('div');
-    newInputGroup.className = 'input-group mb-2';
-    newInputGroup.innerHTML = `
-        <input class="form-control" type="text" name="dayPlans[]" placeholder="Enter a day plan" />
-        <div class="input-group-append">
-          <button type="button" class="btn btn-danger" onclick="removePlan(this)">Delete</button>
-        </div>
-      `;
-    dayPlansDiv.insertBefore(newInputGroup, dayPlansDiv.lastElementChild);
+    const container = document.getElementById('dayPlansContainer');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'dayPlans[]';
+    input.placeholder = 'Enter day plan';
+    container.appendChild(input);
+    addStatusDropdown(container, 'dayPlansStatus[]');
   }
 
   function addWeekPlan() {
