@@ -1,0 +1,618 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Add Vehicle Type</h3>
+  </li>
+</ul>
+<style>
+  #overlay{	
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 80%;
+    height:100%;
+    display: none;
+    background: rgba(199, 197, 197, 0.6);
+  }
+  .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+  @keyframes sp-anime {
+    100% { 
+      transform: rotate(360deg); 
+    }
+  }
+  .is-hide{
+    display:none;
+  }
+  </style>
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Add a new vehicle type to the system.
+            </h4>
+            <br /><br />
+            <% include ../Partials/errorMessages %>
+            <form
+              method="POST"
+              class="form-horizontal"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group row">
+                <label for="vehicleTypeName" class="col-sm-2 col-form-label"
+                  >Vehicle Type Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleTypeName"
+                    name="name"
+                    placeholder="Enter your Name of the Vehicle"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleCapacity" class="col-sm-2 col-form-label"
+                  >Capacity</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleCapacity"
+                    name="capacity"
+                    placeholder="Enter the capacity of the vehicle"
+                   
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Please enter capacity in tons.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Dimensions</label>
+                <div class="col-sm-10">
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Length</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleLength"
+                      name="vehicleLength"
+                      placeholder="Enter vehicle's Length"
+                  
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Width</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleWidth"
+                      name="vehicleWidth"
+                      placeholder="Enter vehicle's Width"
+                     
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Height</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleHeight"
+                      name="vehicleHeight"
+                      placeholder="Enter vehicle's Heigth"
+                    
+                    />
+                  </div>
+                  <div>
+                    <small class="form-text text-muted"
+                      >Please enter dimentions in feet.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleIcons" class="col-sm-2 col-form-label"
+                  >Images</label
+                >
+                <div class="col-sm-10">
+                  <input type="file" id="vehicleIcons" name="icons" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleTypeName" class="col-sm-2 col-form-label"
+                  >Minimum Rate</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="minimumRate"
+                    name="minimumRate"
+                    value="5000"
+                    required         
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <button
+                  id="btnRates"
+                  type="button"
+                  class="col-sm-2 col-form-label btn btn-outline-secondary btn-sm waves-effect"
+                >
+                  Add Rates
+                </button>
+              </div>
+              <div id="error" style="color: red; margin-left: 160px;">
+                <div id="errormessage"></div>
+              </div>
+              <div
+                style="display: none"
+                class="form-group row"
+                id="div_rate"
+                name="rates[]"
+              >
+                <label class="col-sm-2 col-form-label">Rates</label>
+                <div class="col-sm-10 rates_input_div">
+                  <div>
+                    <div
+                      class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                    >
+                      <span
+                        class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                        ><span class="input-group-text">Start</span></span
+                      >
+                      <input
+                        id="kmFrom"
+                        class="form-control km-from"
+                        type="text"
+                        name="kmFrom"
+                        placeholder="Enter Kilometer"
+                      />
+                      &nbsp;
+                      <span
+                        class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                        ><span class="input-group-text">End</span></span
+                      >
+                      <input
+                        id="kmTo"
+                        class="form-control km-to"
+                        type="text"
+                        name="kmTo"
+                        placeholder="Enter Kilometers"
+                      />
+                      &nbsp;
+                      <span
+                        class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                        ><span class="input-group-text">Price</span></span
+                      >
+                      <input
+                        id="price"
+                        class="form-control"
+                        type="text"
+                        name="price"
+                        placeholder="Enter price"
+                      />
+                      &nbsp;
+                    </div>
+                    <br />
+                    <div id="checkk">
+                    <div id="checkdiv">
+                      <label class="col-sm-0">Onwards</label>
+                      <input
+                        type="hidden"
+                        id="chbPriceHidden"
+                        value="unchecked"
+                        class="chb_rate_default"
+                      />
+                      <input
+                        type="checkbox"
+                        id="chbPrice"
+                        value="checked"
+                        class="chb_rate_default"
+                      />
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  id="btnAddRate"
+                  type="button"
+                  class="btn btn-success btn-sm waves-effect add_more_rate"
+                >
+                  Add
+                </button>
+              </div>
+
+              <button
+                id="addvehicle"
+                type="submit"
+                 
+                title="Please Check Onwards Value"
+                value="hover me please"
+                class="btn btn-primary btn-group waves-effect"
+              >
+                Add Vehicle
+              </button>
+
+              <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>
+<script>
+  
+  var $loading = $('#overlay').hide();
+  $(document)
+  .ajaxStart(function () {
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
+</script>
+<script>
+  $(function () {
+    $("#btnRates").click(function () {
+      $("#div_rate").toggle();
+      $("#addvehicle").attr("disabled",true);
+      $("#addvehicle").css({"background-color": "#cccccc", "color": "#666666","border":"1px solid #999999","cursor": "not-allowed"});
+    });
+
+    $(document).on("click", ".add_more_rate", function (e) {
+      e.preventDefault();
+      i=0
+      let cnt = $(".rates").length;
+      let id = "newRate_" + cnt;
+      $("#checkk").hide();
+      $("#checkdiv").remove();
+      let startValue0 = $(".rates_input_div").find("#kmFrom_newRate_0").attr("name", "kmFrom").val();
+      let startValue1 = $(".rates_input_div").find("#kmFrom_newRate_1").attr("name", "kmFrom").val();
+      let startValue2 = $(".rates_input_div").find("#kmFrom_newRate_2").attr("name", "kmFrom").val();
+      let startValue3 = $(".rates_input_div").find("#kmFrom_newRate_3").attr("name", "kmFrom").val();
+      let startValue4 = $(".rates_input_div").find("#kmFrom_newRate_4").attr("name", "kmFrom").val();
+      let startValue5 = $(".rates_input_div").find("#kmFrom_newRate_5").attr("name", "kmFrom").val();
+      let startValue6 = $(".rates_input_div").find("#kmFrom_newRate_6").attr("name", "kmFrom").val();
+      let startValue7 = $(".rates_input_div").find("#kmFrom_newRate_7").attr("name", "kmFrom").val();
+      let startValue8 = $(".rates_input_div").find("#kmFrom_newRate_8").attr("name", "kmFrom").val();
+      let startValue9 = $(".rates_input_div").find("#kmFrom_newRate_9").attr("name", "kmFrom").val();
+      let startValue10 = $(".rates_input_div").find("#kmFrom_newRate_10").attr("name", "kmFrom").val();
+      let startValue11 = $(".rates_input_div").find("#kmFrom_newRate_11").attr("name", "kmFrom").val();
+      let startValue12 = $(".rates_input_div").find("#kmFrom_newRate_12").attr("name", "kmFrom").val();
+      let startValue13 = $(".rates_input_div").find("#kmFrom_newRate_13").attr("name", "kmFrom").val();
+      let startValue14 = $(".rates_input_div").find("#kmFrom_newRate_14").attr("name", "kmFrom").val();
+      let startValue15 = $(".rates_input_div").find("#kmFrom_newRate_15").attr("name", "kmFrom").val();
+      let startValue16 = $(".rates_input_div").find("#kmFrom_newRate_16").attr("name", "kmFrom").val();
+      
+      let endValue = $(".rates_input_div")
+        .find(".km-to:last")
+        .attr("name", "kmTo")
+        .val();
+      let convertEndValue = parseInt(endValue, 10);
+      let newValue = convertEndValue + 1;
+
+      $(".rates_input_div").find(".km-to:last").attr("name", "kmTo").change(function(){
+      // $("#numbercss").css("margin-bottom", "16px");
+       $("#errormessage").hide();   
+       $("#error").empty();
+      });
+      var html =
+        `<div class="rates" id=` +
+        id +
+        `>
+          
+          <div
+            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+          >
+            <span
+              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+              ><span class="input-group-text">Start</span></span
+            >
+            <input
+              id="kmFrom_` +
+        id +
+        `"
+              class="form-control km-from"
+              type="text"
+              name="kmFrom"
+              placeholder="Enter Kilometer"
+            />
+            &nbsp;
+            <span
+              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+              ><span class="input-group-text">End</span></span
+            >
+            <input
+              id="kmTo_` +
+        id +
+        `"
+              class="form-control km-to"
+              type="text"
+              name="kmTo"
+              placeholder="Enter Kilometers"
+              
+            />
+            &nbsp;
+            <span
+              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+              ><span class="input-group-text">Price</span></span
+            >
+            <input
+              id="price_` +
+        id +
+        `"
+              class="form-control"
+              type="text"
+              name="price"
+              placeholder="Enter price"
+            />
+            &nbsp;
+          </div>
+          <br/>
+          <div id="checkdiv">
+            <label class="col-sm-0">Onwards</label>
+            <input type="hidden" id="chbPriceHidden_` +
+        id +
+        `" value="unchecked" class="chb_rate" />
+            <input type="checkbox" id="chbPrice_` +
+        id +
+        `" value="checked" class="chb_rate" />
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button id="btnRemoveRate_` +
+        id +
+        `" type="button" class="btn btn-danger btn-sm waves-effect remove_rate">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>`;
+      if(Number(startValue0)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue1)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`); 
+      }else if(Number(startValue2)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue3)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue4)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue5)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue6)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue7)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue8)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue9)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue10)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue11)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue12)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue13)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue14)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue15)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }else if(Number(startValue16)>endValue){
+        var html = ` Please Check Date`;
+                      $("#error").add().append(`<div id="errormessage" style="margin-left: 40px;">Check kilometer</div>`);
+      }
+      else{
+        $(".rates_input_div").append(html);
+      }
+
+      $(".rates").find(".km-from").attr("readonly", true);
+      $(".rates")
+        .find("#kmFrom_" + id)
+        .val(newValue);
+    });
+    $('div').each(function() {
+     var $p = $(this);
+     if($.trim($p.html())==='') {
+        $p.remove();
+     }
+    });
+    let i = 0
+    let j = 1;
+
+    $(document).on("click", ".remove_rate", function () {
+      $("#errormessage").hide();   
+       $("#error").empty();
+       if(i == 0){
+        let cnt = $(".rates").length - i;
+        let idd = "newRate_" + String(Number(cnt)-1);
+        var tick =
+        `<div class="rates" id=` +
+        idd +
+        `>
+          
+          <div id="checkdiv">
+            <label class="col-sm-0">Onwards</label>
+            <input type="hidden" id="chbPriceHidden_` +
+        idd +
+        `" value="unchecked" class="chb_rate" />
+            <input type="checkbox" id="chbPrice_` +
+        idd +
+        `" value="checked" class="chb_rate" />
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button id="btnRemoveRate_` +
+        idd +
+        `" type="button" class="btn btn-danger btn-sm waves-effect remove_rate">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>`;
+
+      $("#"+`${idd}`).remove();
+      $(".rates_input_div").append(tick)
+      i += 1;
+       }else{
+        let cnt = $(".rates").length - 1;
+        let idd = "newRate_" + String(Number(cnt)-1);
+        console.log("cnt else",cnt);
+        console.log("else idd",idd)
+
+        var tick =
+        `<div class="rates" id=` +
+        idd +
+        `>
+                  
+          <div id="checkdiv">
+            <label class="col-sm-0">Onwards</label>
+            <input type="hidden" id="chbPriceHidden_` +
+        idd +
+        `" value="unchecked" class="chb_rate" />
+            <input type="checkbox" id="chbPrice_` +
+        idd +
+        `" value="checked" class="chb_rate" />
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button id="btnRemoveRate_` +
+        idd +
+        `" type="button" class="btn btn-danger btn-sm waves-effect remove_rate">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>`;
+
+      $("#"+`${idd}`).remove();
+      // $(".rates_input_div").append(tick)
+       }
+       i += 1;
+      // let id = $(this).attr("id");
+      // let split_id = id.split("_");
+      // let removeId = "#newRate_" + split_id[2];
+      // $(removeId).remove();
+    });
+
+    $(document).on("click", ".chb_rate_default", function () {
+      if ($(this).is(":checked") == true) {
+        $("#kmTo").val("-1");
+        $("#btnAddRate").attr("disabled", true);
+        $("#kmTo").attr("readonly", true);
+        $("#addvehicle").attr("disabled",false);
+        $("#addvehicle").css({"background-color": "#67a8e4","color":"white", "border": "1px solid #67a8e4", "cursor": "pointer"});
+      } else {
+        $("#kmTo").val("");
+        $("#btnAddRate").attr("disabled", false);
+        $("#kmTo").attr("readonly", false);
+        $("#addvehicle").attr("disabled",true);
+        $("#addvehicle").css({"background-color": "#cccccc", "color": "#666666","border":"1px solid #999999","cursor": "not-allowed"});
+      }
+    });
+
+    $(document).on("click", ".chb_rate", function () {
+      let id = $(this).attr("id");
+      let slice_id = id.slice(9);
+
+      if ($(this).is(":checked") == true) {
+        $("#kmTo_" + slice_id).val("-1");
+        $("#btnAddRate").attr("disabled", true);
+        $("#btnRemoveRate_" + slice_id).attr("disabled", true);
+        $("#kmTo_" + slice_id).attr("readonly", true);
+        $("#addvehicle").attr("disabled",false);
+        $("#addvehicle").css({"background-color": "#67a8e4","color":"white", "border": "1px solid #67a8e4", "cursor": "pointer"});
+      } else {
+        $("#kmTo_" + slice_id).val("");
+        $("#btnAddRate").attr("disabled", false);
+        $("#btnRemoveRate_" + slice_id).attr("disabled", false);
+        $("#kmTo_" + slice_id).attr("readonly", false);
+        $("#addvehicle").attr("disabled",true);
+        $("#addvehicle").css({"background-color": "#cccccc", "color": "#666666","border":"1px solid #999999","cursor": "not-allowed"});
+      }
+    });
+  });
+</script>

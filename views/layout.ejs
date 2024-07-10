@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
+    />
+    <title>Road Ferry</title>
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App Icons -->
+    <link rel="icon" href="/assets/images/road.png" type="image/x-icon" />
+
+    <%- HeaderCss %> <% include ./Partials/HeaderStyle %>
+  </head>
+  <body class="fixed-left">
+    <!-- Loader -->
+    <div id="preloader">
+      <div id="status"><div class="spinner"></div></div>
+    </div>
+
+    <div id="wrapper">
+      <% include ./Partials/Header %>
+      <div class="content-page">
+        <div class="content">
+          <!-- NOTIFICATION SECTION STARTS -->
+          <div class="topbar">
+            <nav class="navbar-custom">
+              <!-- Search input -->
+              <div class="search-wrap" id="search-wrap">
+                <div class="search-bar">
+                  <input
+                    class="search-input"
+                    type="search"
+                    placeholder="Search"
+                  />
+                  <a
+                    href="#"
+                    class="close-search toggle-search"
+                    data-target="#search-wrap"
+                  >
+                    <i class="mdi mdi-close-circle"></i>
+                  </a>
+                </div>
+              </div>
+
+              <ul class="list-inline float-right mb-0">
+                <!-- Search -->
+                <li class="list-inline-item dropdown notification-list">
+                  <a
+                    class="nav-link waves-effect toggle-search"
+                    href="#"
+                    data-target="#search-wrap"
+                  >
+                    <i class="mdi mdi-magnify noti-icon"></i>
+                  </a>
+                </li>
+
+                <!-- Fullscreen -->
+                <li
+                  class="list-inline-item dropdown notification-list hidden-xs-down"
+                >
+                  <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                    <i class="mdi mdi-fullscreen noti-icon"></i>
+                  </a>
+                </li>
+
+                <!-- language-->
+                <!-- <li class="list-inline-item dropdown notification-list hidden-xs-down">
+                  <a
+                    class="nav-link dropdown-toggle arrow-none waves-effect text-muted"
+                    data-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-haspopup="false"
+                    aria-expanded="false"
+                  >
+                    English
+                    <img
+                      src="/assets/images/flags/us_flag.jpg"
+                      class="ml-2"
+                      height="16"
+                      alt=""
+                    />
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right language-switch">
+                    <a class="dropdown-item" href="#"
+                      ><img
+                        src="/assets/images/flags/germany_flag.jpg"
+                        alt=""
+                        height="16"
+                      /><span> German </span></a
+                    >
+                    <a class="dropdown-item" href="#"
+                      ><img
+                        src="/assets/images/flags/italy_flag.jpg"
+                        alt=""
+                        height="16"
+                      /><span> Italian </span></a
+                    >
+                    <a class="dropdown-item" href="#"
+                      ><img
+                        src="/assets/images/flags/french_flag.jpg"
+                        alt=""
+                        height="16"
+                      /><span> French </span></a
+                    >
+                    <a class="dropdown-item" href="#"
+                      ><img
+                        src="/assets/images/flags/spain_flag.jpg"
+                        alt=""
+                        height="16"
+                      /><span> Spanish </span></a
+                    >
+                    <a class="dropdown-item" href="#"
+                      ><img
+                        src="/assets/images/flags/russia_flag.jpg"
+                        alt=""
+                        height="16"
+                      /><span> Russian </span></a
+                    >
+                  </div>
+                </li> -->
+
+                <!-- notification-->
+                <li
+                  class="list-inline-item dropdown notification-list notificationClass"
+                >
+                  <a
+                    href="#"
+                    class="nav-link dropdown-toggle arrow-none waves-effect notificationList"
+                    data-toggle="dropdown"
+                    role="button"
+                    aria-haspopup="false"
+                    aria-expanded="false"
+                  >
+                    <i class="ion-ios7-bell noti-icon"></i>
+                    <span
+                      class="badge badge-danger noti-icon-badge"
+                      id="notiCount"
+                    ></span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
+                  >
+                    <!-- item-->
+                    <div class="dropdown-item noti-title active">
+                      <h5>Notifications</h5>
+                    </div>
+
+                    <!-- item-->
+                    <div
+                      class="notificationMainDiv"
+                      style="
+                        max-height: calc(100vh - 200px);
+                        overflow-y: scroll;
+                      "
+                    ></div>
+                  </div>
+                </li>
+                <!-- User-->
+                <li class="list-inline-item dropdown notification-list">
+                  <a
+                    class="nav-link dropdown-toggle arrow-none waves-effect nav-user"
+                    data-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-haspopup="false"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src="/assets/images/user.png"
+                      alt="user"
+                      class="rounded-circle"
+                    />
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right profile-dropdown"
+                  >
+                    <a class="dropdown-item" href="/profile"
+                      ><i class="dripicons-user text-muted"></i> Profile</a
+                    >
+                    <!-- <a class="dropdown-item" href="#"
+                      ><i class="dripicons-wallet text-muted"></i> My Wallet</a
+                    >
+                    <a class="dropdown-item" href="#"
+                      ><span class="badge badge-success pull-right m-t-5">5</span
+                      ><i class="dripicons-gear text-muted"></i> Settings</a
+                    > -->
+                    <a class="dropdown-item" href="/changePassword"
+                      ><i class="dripicons-lock text-muted"></i> Change
+                      Password</a
+                    >
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout"
+                      ><i class="dripicons-exit text-muted"></i> Logout</a
+                    >
+                  </div>
+                </li>
+              </ul>
+
+              <!-- Page title -->
+              <%- breadcrumb %>
+
+              <div class="clearfix"></div>
+            </nav>
+          </div>
+
+          <!-- NOTIFICATION SECTION ENDS -->
+
+          <%- body %>
+        </div>
+        <% include ./Partials/Footer %>
+      </div>
+    </div>
+    <script src="/assets/js/cities.js"></script>
+    <% include ./Partials/FooterScript %> <%- FooterJs %>
+
+    <script src="/assets/js/app.js"></script>
+    <script>
+      $(function () {
+        $(document).ready(function () {
+          let title = $('.page-title').text();
+
+          document.title = `Road Ferry - ${title}`;
+
+          console.log('page title******', title);
+          $.ajax({
+            url: `/notificationCount`,
+          }).done(function (res) {
+            // console.log("RESPONSE******", res.admin);
+            if (
+              res.admin.userAdmin.noti_count == 0 ||
+              res.admin.userAdmin.noti_count == 'undefined'
+            ) {
+              $('#notiCount').hide();
+            } else {
+              document.getElementById('notiCount').innerHTML =
+                res.admin.userAdmin.noti_count;
+            }
+          });
+        });
+
+        $(document).on('click', '.notificationList', function (e) {
+          e.preventDefault();
+
+          $.ajax({
+            url: `/notifications`,
+          }).done(function (res) {
+            // console.log("RESPONSE******", res);
+            // $("#notiCount").css("display", "none");
+            document.getElementById('notiCount').innerHTML =
+              res.admin.noti_count;
+            for (var i = 0; i < res.notifications.length; i++) {
+              const id = 'notiRead_' + res.notifications[i].id;
+              // console.log("ID IS*******", id);
+              // var html = `<a href="javascript:void(0);" class="dropdown-item notify-item">
+              var html =
+                `<a href="#" class="dropdown-item notify-item readNotifications" id=` +
+                id +
+                `>
+                          <div class="notify-icon bg-warning">
+                            <i>${i + 1}</i>
+                          </div>
+                          <p class="notify-details">
+                            <b>${res.notifications[i].notificationData.type}</b
+                            ><small class="text-muted"
+                              >${
+                                res.notifications[i].notificationData.text
+                              }</small
+                            >
+                          </p>
+                        </a>
+                      `;
+              $('.notificationMainDiv').append(html);
+            }
+          });
+        });
+
+        $(document).on('click', '.readNotifications', function (e) {
+          e.preventDefault();
+          let id = $(this).attr('id');
+          let getNotiId = id.split('_')[1];
+
+          const data = {
+            notiId: getNotiId,
+          };
+
+          // console.log("ID*******", id);
+          // console.log("SPLIT ID***", getNotiId);
+
+          $.ajax({
+            url: `/readNotification`,
+            data: data,
+          }).done(function (res) {
+            location.reload();
+            // console.log("RESPONSE******", res);
+            // document.getElementById("notiCount").innerHTML =
+            //   res.admin.userAdmin.noti_count;
+          });
+        });
+      });
+    </script>
+    <%- BottomJs %>
+  </body>
+</html>

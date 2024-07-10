@@ -1,0 +1,492 @@
+<%- contentFor('HeaderCss') %>
+
+<!-- DataTables -->
+<link
+  href="/assets/plugins/datatables/dataTables.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="/assets/plugins/datatables/buttons.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<!-- Responsive datatable examples -->
+<link
+  href="/assets/plugins/datatables/responsive.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Edit Transporter Detail</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular Transporter
+            </h4>
+            <br />
+            <% include ../../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label
+                  for="transporterFirstName"
+                  class="col-sm-2 col-form-label"
+                  >First Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="transporterFirstName"
+                    name="firstname"
+                    value="<%=transporter.first_name%>"
+                    placeholder="Enter your First Name"
+                  
+                   />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="transporterLastName" class="col-sm-2 col-form-label"
+                  >Last Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="transporterLastName"
+                    name="lastname"
+                    value="<%= transporter.last_name %>"
+                    placeholder="Enter your Last Name"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="transporterEmail" class="col-sm-2 col-form-label"
+                  >Email</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="transporterEmail"
+                    name="email"
+                    placeholder="Enter your Email"
+                    value="<%= transporter.email %>"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="transporterPhoneNumber"
+                  class="col-sm-2 col-form-label"
+                  >Phone Number</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="transporterPhoneNumber"
+                    name="phone"
+                    placeholder="Enter your Phone Number"
+                    value="<%= transporter.phone_number %>"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="transporterAddress" class="col-sm-2 col-form-label"
+                  >Address</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="transporterAddress"
+                    name="address"
+                    placeholder="Please enter your address"
+                    value="<%= transporter.address.flat_number %>"
+                  
+                  />
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Area</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="area"
+                      name="area"
+                      placeholder="Enter the area"
+                      value="<%= transporter.address.area %>"
+                     
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">City</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="city"
+                      name="city"
+                      placeholder="Enter the city"
+                      value="<%= transporter.address.city %>"
+                     
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Pincode</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="pincode"
+                      name="pincode"
+                      placeholder="Enter your pincode"
+                      value="<%= transporter.address.pincode %>"
+                      
+                    />
+                  </div>
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">State</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="state"
+                      name="state"
+                      placeholder="Enter the State"
+                      value="<%= transporter.address.state %>"
+                      
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Country</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="country"
+                      name="country"
+                      placeholder="Enter the Country"
+                      value="<%= transporter.address.country %>"
+                     
+                    />
+                  </div>
+                </div>
+              </div>
+        
+              <div class="form-group row">
+                <label
+                  for="transporterGstNumber"
+                  class="col-sm-2 col-form-label"
+                  >GST Number</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" 
+                  type="text"
+                  id="transporterGstNumber" 
+                  placeholder="Enter your GST Number"
+                  name="gstNo" 
+                  value="<%=transporter.gst_number %>"
+                   />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="transporterRegisterNumber"
+                  class="col-sm-2 col-form-label"
+                  >Register Number</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" 
+                  type="text"
+                  id="transporterRegisterNumber" 
+                  name="registerNo"
+                  placeholder="Enter your Register Number" 
+                  value="<%= transporter.register_number %>" />
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <a
+                  type="button"
+                  id="transporterDrivers_<%= transporter.id %>"
+                  class="btn btn-outline-purple waves-effect waves-light driver-list"
+                  href="/driver/<%= transporter.id %>/displayDrivers"
+                >
+                  List all drivers</a
+                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a
+                  type="button"
+                  class="btn btn-outline-purple waves-effect waves-light"
+                  href="/vehicle/<%= transporter.id %>/displayVehicles"
+                >
+                  List all vehicles
+                </a>
+              </div> -->
+
+              <!-- Tabs -->
+              <!-- <div class="form-group row">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      data-toggle="tab"
+                      href="#DriversList"
+                      role="tab"
+                    >
+                      <span>Drivers</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#VehicleList"
+                      role="tab"
+                    >
+                      <span>Vehicles</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#OrderList"
+                      role="tab"
+                    >
+                      <span>Orders</span>
+                    </a>
+                  </li>
+                </ul>
+              </div> -->
+
+            
+             
+
+              <button
+                type="button"
+                class="btn btn-group btn-primary waves-effect"
+                onclick="location.href='/transporter/list'"
+              >
+                Display Transporters
+              </button>
+              <button
+              type="submit"
+              class="btn btn-primary btn-group waves-effect"
+              >
+              Update Transporter
+             </button>
+              <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-group btn-danger waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>
+<!-- Required datatable js -->
+<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/assets/plugins/datatables/jszip.min.js"></script>
+<script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/assets/pages/datatables.init.js"></script>
+
+<!-- <script>
+  $(function () {
+    $(".status_form_driver").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");
+      // console.log("ID***",id);
+      const transporter_id=id.split("_")[1];
+      // console.log("TransporterID***",transporter_id);
+      const driver_id=id.split("_")[2];
+      // console.log("DriverID***",driver_id);
+      const data={
+        reason:$("#statusChangeReason_"+driver_id).val(),
+      }
+      // console.log("DATA***",data);
+      $.ajax({
+        url:`/driver/${transporter_id}/status/${driver_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload();
+        },
+        error:function(){
+          alert(`There is some issue with changing status`);
+        }
+      });
+    });
+
+    $(".remove_form_driver").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");
+      const transporter_id=id.split("_")[1];
+      const driver_id=id.split("_")[2];
+      const data={
+        reason:$("#reasonForDelete_"+driver_id).val(),
+      }
+      // console.log(data,split_id);
+      $.ajax({
+        url:`/driver/${transporter_id}/removeDriver/${driver_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload();
+          // alert("The Record's been deleted...!!");
+        },
+        error:function(){
+          alert(`There is some issue with the delete.`);
+        }
+      });
+    });
+
+    $(document).on("click", ".change_isVerified_driver", function (e) {
+      e.preventDefault();
+      const id=$(this).attr("id");
+      // console.log("ID",id);
+      const transporter_id=id.split("_")[1];
+      // console.log("TID",transporter_id);
+      const driver_id=id.split("_")[2];
+      // console.log("DID",driver_id);
+      $.ajax({
+        url:`/driver/${transporter_id}/verifyDriver/${driver_id}`,
+        type:"POST",
+        success:function(){
+          location.reload();
+        },
+        error:function(){
+          alert(`There is some issue with verification`);
+        }
+      });
+    });
+
+    $(".status_form_vehicle").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");
+    //   console.log("ID***",id);
+      const transporter_id=id.split("_")[1];
+    //   console.log("TransporterID***",transporter_id);
+      const vehicle_id=id.split("_")[2];
+    //   console.log("DriverID***",driver_id);
+      const data={
+        reason:$("#statusChangeReason_"+vehicle_id).val(),
+      }
+    //   console.log("DATA***",data);
+      $.ajax({
+        url:`/vehicle/${transporter_id}/status/${vehicle_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload();
+        },
+        error:function(){
+          alert(`There is some issue with changing status`);
+        }
+      });
+    });
+
+    $(".remove_form_vehicle").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");
+      const transporter_id=id.split("_")[1];
+      const vehicle_id=id.split("_")[2];
+      const data={
+        reason:$("#reasonForDelete_"+vehicle_id).val(),
+      }
+      $.ajax({
+        url:`/vehicle/${transporter_id}/removeVehicle/${vehicle_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload();
+          // alert("The Record's been deleted...!!");
+        },
+        error:function(){
+          alert(`There is some issue with the delete.`);
+        }
+      });
+    });
+
+    $(document).on("click", ".change_isVerified_vehicle", function (e) {
+      e.preventDefault();
+      const id=$(this).attr("id");
+    //   console.log("ID",id);
+      const transporter_id=id.split("_")[1];
+    //   console.log("TID",transporter_id);
+      const vehicle_id=id.split("_")[2];
+    //   console.log("VID",vehicle_id);
+      $.ajax({
+        url:`/vehicle/${transporter_id}/verifyVehicle/${vehicle_id}`,
+        type:"POST",
+        success:function(){
+          location.reload();
+        },
+        error:function(){
+          alert(`There is some issue with verification`);
+        }
+      });
+    });
+  });
+</script> -->
+
+

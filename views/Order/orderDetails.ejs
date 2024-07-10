@@ -1,0 +1,1216 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Order Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular order
+            </h4>
+            <br /><br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="orderId" class="col-sm-2 col-form-label"
+                  >Order ID</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderId"
+                    name="OrderId"
+                    value="<%= order.orderData.order_id %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="clientName" class="col-sm-2 col-form-label"
+                  >Client</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="clientName"
+                    name="client"
+                    value="<%= order.customer.customerData.first_name %> <%=
+                  order.customer.customerData.last_name %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderPrice" class="col-sm-2 col-form-label"
+                  >Price</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderPrice"
+                    name="price"
+                    value="<%= order.orderData.price %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderPaymentMode" class="col-sm-2 col-form-label"
+                  >Payment Mode</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderPaymentMode"
+                    name="paymentMode"
+                    value="<%= order.orderData.payment_mode %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderStatus" class="col-sm-2 col-form-label"
+                  >Status</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderStatus"
+                    name="status"
+                    value="<%= order.orderData.status %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderCreatedAt" class="col-sm-2 col-form-label"
+                  >Order Date</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderCreatedAt"
+                    name="createdAt"
+                    value="<%= order.orderData.created_at.toDate() %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderSource" class="col-sm-2 col-form-label"
+                  >Source</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderSource"
+                    name="source"
+                    value="<%= order.orderData.pickup_location.flat_name %>"
+                    readonly
+                  />
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Area</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderSourceArea"
+                      name="sourceArea"
+                      value="<%= order.orderData.pickup_location.area %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">City</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderSourceCity"
+                      name="sourceCity"
+                      value="<%= order.orderData.pickup_location.city %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Pincode</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderSourcePincode"
+                      name="sourcePincode"
+                      value="<%= order.orderData.pickup_location.pincode %>"
+                      readonly
+                    />
+                  </div>
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">State</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderSourceState"
+                      name="sourceState"
+                      value="<%= order.orderData.pickup_location.state %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Country</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderSourceCountry"
+                      name="sourceCountry"
+                      value="<%= order.orderData.pickup_location.country %>"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="orderDestination" class="col-sm-2 col-form-label"
+                  >Destination</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="orderDestination"
+                    name="destination"
+                    value="<%= order.orderData.drop_location.flat_name %>"
+                    readonly
+                  />
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Area</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderDestinationArea"
+                      name="destinationArea"
+                      value="<%= order.orderData.drop_location.area %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">City</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderDestinationCity"
+                      name="destinationCity"
+                      value="<%= order.orderData.drop_location.city %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Pincode</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderDestinationPincode"
+                      name="destinationPincode"
+                      value="<%= order.orderData.drop_location.pincode %>"
+                      readonly
+                    />
+                  </div>
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">State</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderDestinationState"
+                      name="destinationState"
+                      value="<%= order.orderData.drop_location.state %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Country</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="orderDestinationCountry"
+                      name="destinationCountry"
+                      value="<%= order.orderData.drop_location.country %>"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabs -->
+              <div class="form-group row">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      data-toggle="tab"
+                      href="#TransporterDetails"
+                      role="tab"
+                    >
+                      <span>Transporter</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#CustomerDetails"
+                      role="tab"
+                    >
+                      <span>Customer</span>
+                    </a>
+                  </li>
+                  <% if(order.orderData.status === "assigned" ||
+                  order.orderData.status === "completed") { %>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#DriverDetails"
+                      role="tab"
+                    >
+                      <span>Driver</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-toggle="tab"
+                      href="#VehicleDetails"
+                      role="tab"
+                    >
+                      <span>Vehicle</span>
+                    </a>
+                  </li>
+                  <% } %>
+                </ul>
+              </div>
+
+              <div class="tab-content">
+                <div
+                  class="tab-pane active p-3"
+                  id="TransporterDetails"
+                  role="tabpanel"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card m-b-20">
+                        <div class="card-body">
+                          <h4 class="mt-0 header-title">Transporter Details</h4>
+                          <br /><br />
+                          <% include ../Partials/errorMessages %>
+                          <form method="POST" class="form-horizontal">
+                            <div class="form-group row">
+                              <label
+                                for="transporterImage"
+                                class="col-sm-2 col-form-label"
+                                >Photo</label
+                              >
+                              <div class="col-sm-10">
+                                <img
+                                  src="<%= order.transporter.transporterData?.transporter_photo %>"
+                                  height="100px"
+                                  width="100px"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterId"
+                                class="col-sm-2 col-form-label"
+                                >Transporter ID</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterId"
+                                  name="TransporterId"
+                                  value="<%= order.transporter.id %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterFirstName"
+                                class="col-sm-2 col-form-label"
+                                >First Name</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterFirstName"
+                                  name="TransporterFirstName"
+                                  value="<%= order.transporter.transporterData?.first_name %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterLastName"
+                                class="col-sm-2 col-form-label"
+                                >Last Name</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterLastName"
+                                  name="TransporterLastName"
+                                  value="<%= order.transporter.transporterData?.last_name %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterEmail"
+                                class="col-sm-2 col-form-label"
+                                >Email</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterEmail"
+                                  name="TransporterEmail"
+                                  value="<%= order.transporter.transporterData?.email %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterPhoneNumber"
+                                class="col-sm-2 col-form-label"
+                                >Phone</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterPhoneNumber"
+                                  name="TransporterPhoneNumber"
+                                  value="<%= order.transporter.transporterData?.phone_number %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterIsRegistered"
+                                class="col-sm-2 col-form-label"
+                                >Registered</label
+                              >
+                              <div class="col-sm-10">
+                                <input class="form-control" type="text"
+                                id="transporterIsRegistered"
+                                name="TransporterIsRegistered" <%
+                                if(order.transporter.transporterData?.registered
+                                === true) { %> value="Registered"<% } else { %>
+                                value="Non-Registered" <% } %> readonly />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterAddress"
+                                class="col-sm-2 col-form-label"
+                                >Address</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="transporterAddress"
+                                  name="TransporterAddress"
+                                  value="<%= order.transporter.transporterData?.address?.flatNumber %>"
+                                  readonly
+                                />
+                                <br />
+                                <div
+                                  class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                                >
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Area</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="transporterArea"
+                                    name="TransporterArea"
+                                    value="<%= order.transporter.transporterData?.address?.area %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >City</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="transporterCity"
+                                    name="TransporterCity"
+                                    value="<%= order.transporter.transporterData?.address?.city %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Pincode</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="transporterPincode"
+                                    name="TransporterPincode"
+                                    value="<%= order.transporter.transporterData?.address?.pincode %>"
+                                    readonly
+                                  />
+                                </div>
+                                <br />
+                                <div
+                                  class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                                >
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >State</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="transporterState"
+                                    name="TransporterState"
+                                    value="<%= order.transporter.transporterData?.address?.state %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Country</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="transporterCountry"
+                                    name="TransporterCountry"
+                                    value="<%= order.transporter.transporterData?.address?.country %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterGst"
+                                class="col-sm-2 col-form-label"
+                                >GST Number</label
+                              >
+                              <div class="col-sm-10">
+                                <input class="form-control" type="text"
+                                id="transporterGst" name="TransporterGst" <%
+                                if(order.transporter.transporterData?.gst_number
+                                === "") { %> value="Not Available"<% } else { %>
+                                value="<%=
+                                order.transporter.transporterData?.gst_number %>"
+                                <% } %> readonly />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="transporterRegisterNumber"
+                                class="col-sm-2 col-form-label"
+                                >Register Number</label
+                              >
+                              <div class="col-sm-10">
+                                <input class="form-control" type="text"
+                                id="transporterRegisterNumber"
+                                name="TransporterRegisterNumber" <%
+                                if(order.transporter.transporterData?.register_number
+                                === "") { %> value="Not Available"<% } else { %>
+                                value="<%=
+                                order.transporter.transporterData?.register_number
+                                %>" <% } %> readonly />
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane p-3" id="CustomerDetails" role="tabpanel">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card m-b-20">
+                        <div class="card-body">
+                          <h4 class="mt-0 header-title">Customer Details</h4>
+                          <br /><br />
+                          <% include ../Partials/errorMessages %>
+                          <form method="POST" class="form-horizontal">
+                            <div class="form-group row">
+                              <label
+                                for="customerImage"
+                                class="col-sm-2 col-form-label"
+                                >Photo</label
+                              >
+                              <div class="col-sm-10">
+                                <img
+                                  src="<%= order.customer.customerData.customer_photo %>"
+                                  height="100px"
+                                  width="100px"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerId"
+                                class="col-sm-2 col-form-label"
+                                >Customer ID</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerId"
+                                  name="CustomerId"
+                                  value="<%= order.customer.id %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerFirstName"
+                                class="col-sm-2 col-form-label"
+                                >First Name</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerFirstName"
+                                  name="CustomerFirstName"
+                                  value="<%= order.customer.customerData.first_name %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerLastName"
+                                class="col-sm-2 col-form-label"
+                                >Last Name</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerLastName"
+                                  name="CustomerLastName"
+                                  value="<%= order.customer.customerData.last_name %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerEmail"
+                                class="col-sm-2 col-form-label"
+                                >Email</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerEmail"
+                                  name="CustomerEmail"
+                                  value="<%= order.customer.customerData.email %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerPhoneNumber"
+                                class="col-sm-2 col-form-label"
+                                >Phone</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerPhoneNumber"
+                                  name="CustomerPhoneNumber"
+                                  value="<%= order.customer.customerData.phone_number %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="customerAddress"
+                                class="col-sm-2 col-form-label"
+                                >Address</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="customerAddress"
+                                  name="CustomerAddress"
+                                  value="<%= order.customer.customerData.address?.flatNumber %>"
+                                  readonly
+                                />
+                                <br />
+                                <div
+                                  class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                                >
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Area</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="customerArea"
+                                    name="CustomerArea"
+                                    value="<%= order.customer.customerData.address?.area %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >City</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="customerCity"
+                                    name="CustomerCity"
+                                    value="<%= order.customer.customerData.address?.city %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Pincode</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="customerPincode"
+                                    name="CustomerPincode"
+                                    value="<%= order.customer.customerData.address?.pincode %>"
+                                    readonly
+                                  />
+                                </div>
+                                <br />
+                                <div
+                                  class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                                >
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >State</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="customerState"
+                                    name="CustomerState"
+                                    value="<%= order.customer.customerData.address?.state %>"
+                                    readonly
+                                  />
+                                  &nbsp;
+                                  <span
+                                    class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                    ><span class="input-group-text"
+                                      >Country</span
+                                    ></span
+                                  >
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="customerCountry"
+                                    name="CustomerCountry"
+                                    value="<%= order.customer.customerData.address?.country %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <% if(order.orderData.status === "assigned" ||
+                  order.orderData.status === "completed") { %>
+                <div class="tab-pane p-3" id="DriverDetails" role="tabpanel">
+                  <!-- <h1>Driver Details</h1> -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card m-b-20">
+                        <div class="card-body">
+                          <h4 class="mt-0 header-title">Driver Details</h4>
+                          <br /><br />
+                          <% include ../Partials/errorMessages %>
+                          <form method="POST" class="form-horizontal">
+                            <div class="form-group row">
+                                <label
+                                  for="driverImage"
+                                  class="col-sm-2 col-form-label"
+                                  >Photo</label
+                                >
+                                <div class="col-sm-10">
+                                  <img
+                                    src="<%= order.driver.driverData.driver_photo %>"
+                                    height="100px"
+                                    width="100px"
+                                  />
+                                </div>
+                              </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="driverId"
+                                class="col-sm-2 col-form-label"
+                                >Driver ID</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="driverId"
+                                  name="DriverId"
+                                  value="<%= order.driver.id %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="driverFirstName"
+                                class="col-sm-2 col-form-label"
+                                >First Name</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="driverFirstName"
+                                  name="DriverFirstName"
+                                  value="<%= order.driver.driverData.first_name %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label
+                                  for="driverLastName"
+                                  class="col-sm-2 col-form-label"
+                                  >Last Name</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverLastName"
+                                    name="DriverLastName"
+                                    value="<%= order.driver.driverData.last_name %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverAge"
+                                  class="col-sm-2 col-form-label"
+                                  >Age</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverAge"
+                                    name="DriverAge"
+                                    value="<%= order.driver.driverData.age %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverEmail"
+                                  class="col-sm-2 col-form-label"
+                                  >Email</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverEmail"
+                                    name="DriverEmail"
+                                    value="<%= order.driver.driverData.email %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverPhone"
+                                  class="col-sm-2 col-form-label"
+                                  >Phone</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverPhone"
+                                    name="DriverPhone"
+                                    value="<%= order.driver.driverData.phone_number %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverIsVerified"
+                                  class="col-sm-2 col-form-label"
+                                  >Verified</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverIsVerified"
+                                    name="DriverIsVerified"
+                                    <% if(order.driver.driverData.is_verified === "verified") { %>
+                                    value="Verified"
+                                    <% } else { %>
+                                    value="Pending"
+                                    <% } %>
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverIdentityProof"
+                                  class="col-sm-2 col-form-label"
+                                  >Identity Proof</label
+                                >
+                                <div class="col-sm-10">
+                                    <img
+                                    src="<%= order.driver.driverData.identity_proof %>"
+                                    height="100px"
+                                    width="100px"
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverAddressProof"
+                                  class="col-sm-2 col-form-label"
+                                  >Address Proof</label
+                                >
+                                <div class="col-sm-10">
+                                    <img
+                                    src="<%= order.driver.driverData.address_proof %>"
+                                    height="100px"
+                                    width="100px"
+                                  />
+                                </div>
+                              </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane p-3" id="VehicleDetails" role="tabpanel">
+                  <!-- <h1>Vehicle Details</h1> -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card m-b-20">
+                        <div class="card-body">
+                          <h4 class="mt-0 header-title">Vehicle Details</h4>
+                          <br /><br />
+                          <% include ../Partials/errorMessages %>
+                          <form method="POST" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="vehicleIcons" class="col-sm-2 col-form-label"
+                                  >Images</label
+                                >
+                                <div class="col-sm-10">
+                                <% if(order.vehicle.vehicleData?.vehicle_photos.length >= 1) { %>
+                                  <% for(var i=0;i<order.vehicle.vehicleData?.vehicle_photos.length;i++) { %>
+                                    <img
+                                      src="<%= order.vehicle.vehicleData?.vehicle_photos[i] %>"
+                                      height="100px"
+                                      width="100px"
+                                    />&nbsp;
+                                  <% } %>
+                                <% } else { %>
+                                  <h6>No images Available</h6>
+                                <% } %>
+                                </div>
+                              </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="vehicleId"
+                                class="col-sm-2 col-form-label"
+                                >Vehicle ID</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="vehicleId"
+                                  name="VehicleId"
+                                  value="<%= order.vehicle.id %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label
+                                for="vehicleType"
+                                class="col-sm-2 col-form-label"
+                                >Vehicle Type</label
+                              >
+                              <div class="col-sm-10">
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  id="vehicleType"
+                                  name="VehicleType"
+                                  value="<%= order.vehicle.vehicleData?.vehicle_type %>"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label
+                                  for="vehicleNumber"
+                                  class="col-sm-2 col-form-label"
+                                  >Vehicle Number</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicleNumber"
+                                    name="VehicleNumber"
+                                    value="<%= order.vehicle.vehicleData?.vehicle_number %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleIsVerified"
+                                  class="col-sm-2 col-form-label"
+                                  >Verified</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicleIsVerified"
+                                    name="VehicleIsVerified"
+                                    <% if(order.vehicle.vehicleData?.is_verified === "verified") { %>
+                                    value="Verified"
+                                    <% } else { %>
+                                    value="Pending"
+                                    <% } %>
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleChassisNumber"
+                                  class="col-sm-2 col-form-label"
+                                  >Chassis Number</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicleChassisNumber"
+                                    name="VehicleChassisNumber"
+                                    value="<%= order.vehicle.vehicleData?.chassis_number %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleComment"
+                                  class="col-sm-2 col-form-label"
+                                  >Comment</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicleComment"
+                                    name="VehicleComment"
+                                    value="<%= order.vehicle.vehicleData?.comment %>"
+                                    readonly
+                                  />
+                                </div>
+                              </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="location.href='/order/list'"
+              >
+                Back
+              </button>
+
+              <!-- <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

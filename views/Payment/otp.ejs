@@ -1,0 +1,214 @@
+<% include ../Partials/HeaderRoot %>
+
+<div id="preloader">
+  <div id="status"><div class="spinner"></div></div>
+</div>
+
+<!-- Begin page -->
+<div class="accountbg"></div>
+<div class="wrapper-page">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="text-center m-0">
+        <a href="#" class="logo logo-admin"
+          ><img src="/icon/sms.png" height="70" alt="logo"
+        /></a>
+      </h3>
+    
+      <div class="p-3">
+        <h4 class="font-18 m-b-5 text-center">Verification</h4>
+        <p class="text-muted text-center">An verification code has been sent to <%= phone_number %></p>
+        <% include ../Partials/errorMessages %>
+        <form class="form-horizontal m-t-30" action="/otp" method="post" id="otp-verification-form">
+          <div class="form-group">
+          <input
+              type="text"
+              class="form-control"
+              name="name"
+              readonly
+              value="<%= name %>" />
+          </div>
+          <script>
+            console.log('<%= name %>');
+          </script>
+          <div class="form-group">
+           <input
+              type="number"
+              class="form-control"
+              name="phone_number"
+              id="phone_number"
+              min="10"
+              readonly
+              value=<%=phone_number %> />
+           </div>
+           <div id="recaptcha-container"></div>
+           <div>
+              <div id="recaptcha-error" style="color: red;"></div>
+           </div>
+           <div class="form-group verification_input_div">
+             </div>
+          <div class="form-group row">
+                 <div class="col-sm-10">
+                   <input
+                     class="form-control"
+                     type="hidden"
+                     id="codeHidden"
+                     name="userUid" 
+                   />
+                 </div>
+               </div>
+           <div class="form-group">
+           <input
+           name="code"
+           class="form-control"
+           id="code"
+           type="number"
+           minlength="6"
+           maxlength="6"
+           placeholder="Enter OTP"
+           required="required"
+         />
+         <button type="button" class="btn btn-link" id="resend-code" style="float: right; color: #007bff !important; padding-right: 0px !important;">Resend Code</button>
+        </div>
+        
+        <div class="form-check mt-2">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="tandc_agreement"
+            name="terms_and_conditions"
+            value="accepted"
+            required="required"
+          >
+          <label class="form-check-label" for="tandc_agreement">
+            I have read and accept the <a href="https://roadferry.in/terms-of-service-customer.html" target="_blank">Terms and Conditions</a>
+          </label>
+        </div>
+
+            </div>
+            
+
+
+            <div class="col-sm-8 text-right">
+              <button
+                class="btn btn-primary w-md waves-effect waves-light"
+                type="button"
+                id="registerButton"
+              >
+               Register
+              </button>
+            </div>
+         
+          </div>
+
+        
+        </form>
+      
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% include ../Partials/FooterRoot %>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+  var config = {
+  apiKey: "AIzaSyALoyUbKfKhksdyblkTeucUUr6o-yhKbMA",
+  authDomain: "logistics-ondemand-app.firebaseapp.com",
+  databaseURL: "https://logistics-ondemand-app.firebaseio.com",
+  projectId: "logistics-ondemand-app",
+  storageBucket: "logistics-ondemand-app.appspot.com",
+  messagingSenderId: "335686843365",
+  appId: "335686843365:web:d4bb2a7c82af72fcdf8d0c",
+  measurementId: "G-7WPCXTQJ8N"
+  };
+firebase.initializeApp(config);
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { size: "invisible" });
+var myResult;
+// $(document).ready(function() {
+//   $("#codeButton").click(function () {
+const phoneNumberString = "+91"+ $("#phone_number").val();
+firebase.auth().signInWithPhoneNumber(phoneNumberString, window.recaptchaVerifier)
+  .then( confirmationResult => {
+    //   console.log(confirmationResult,"result1");
+    window.confirmationResult = confirmationResult;
+    myResult = confirmationResult;
+    $('#recaptcha-error').text("");
+  })
+  .catch(function (error) {
+    $('#recaptcha-error').text(error.message);
+    console.error("SMS not sent", error);
+  });
+//   });
+// });
+//$(document).on("click", ".verify_number", function () {
+$(document).ready(function() {
+  $("#resend-code").click(function () {
+    firebase.auth().signInWithPhoneNumber(phoneNumberString, window.recaptchaVerifier)
+      .then( confirmationResult => {
+        //   console.log(confirmationResult,"result1");
+        window.confirmationResult = confirmationResult;
+        myResult = confirmationResult;
+        $('#recaptcha-error').text("");
+      })
+      .catch(function (error) {
+        $('#recaptcha-error').text(error.message);
+        console.error("SMS not sent", error);
+      });
+  })
+
+  $("#registerButton").click(function () {
+    const isTCAgreed = $("#tandc_agreement").is(':checked');
+    if(!isTCAgreed){
+      alert("Terms and conditions should be agreed to proceed");
+      return;
+    }
+    const code = $("#code").val();
+    if(myResult) {
+      myResult.confirm(code).then((result) => {
+        // console.log(result,'data');
+        let user_uid = result.user.uid;
+        // console.log(user_uid,"UserData");
+        $("#codeHidden").val(user_uid);
+        //alert("Number Verified");
+        const user_id = $("#codeHidden").val();
+        $('#recaptcha-error').text("");
+        $("#otp-verification-form").submit()
+        // $.ajax({
+        //   type: "post",
+        //   url:"/otp",
+        //   data:{ name: '<%=name%>', phone_number: '<%=phone_number%>', userUid: user_id },
+        //   success:function(data){
+        //     //  location.href('/transporterdetails',data);
+        //       // location.href = '/transporterdetails';
+        //     //  data
+        //   },
+        //   error: function(err) {
+        //     console.log(err)
+        //   }
+        // });
+ 
+      }).catch((error) => {
+        //     let html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //     <p>${error.message}</p>
+        //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //     <span aria-hidden="true">&times;</span>
+        //     </button>
+        //   </div>`;
+        //     $(".recaptcha-error").append(html);
+        $('#recaptcha-error').text(error.message);
+        console.error("Verification not completed", error);
+      });
+    } 
+    else {
+      $('#recaptcha-error').text("");
+      let errorMessage = "Please confirm you are not robot"
+      $('#recaptcha-error').text(errorMessage);
+    }
+  });
+});
+
+</script>
+
+

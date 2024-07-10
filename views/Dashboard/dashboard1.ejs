@@ -1,0 +1,210 @@
+<%- contentFor('HeaderCss') %>
+<link href="/assets/plugins/c3/c3.min.css" rel="stylesheet" type="text/css" />
+
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Dashboard</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <% if(data.length > 0) { %>
+        <% for(var i=0;i<data.length;i++) { %>
+          <div class="col-md-6 col-xl-4">
+            <div class="mini-stat clearfix bg-white">
+              <span class="mini-stat-icon bg-purple mr-0 float-right"
+                ><i class="<%= data[i].icon %>"></i
+              ></span>
+              <div class="mini-stat-info">
+                <a href=<%= data[i].link %>>
+                <span class="counter text-purple"><%= data[i].heading %> </span>
+              </a>
+                <span class="counter text-black"><%= data[i].counter %> </span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>   
+        <% } %>
+      <% } %>
+    </div>
+    <div class="row">
+      <div class="col-xl-5">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mt-0 header-title m-b-30">Registred Users</h4>
+            <div class="text-center">
+              <input type="date" id="startDate" name="start" />
+              <input type="date" id="endDate" name="end" />
+              <br/>
+              <br/>
+              <div class="clearfix">
+                <a
+                  class="btn btn-sm btn-warning getData"
+                >View Data</a
+              >
+              </div>
+            </div>
+            <div class="text-center">
+              <br/>
+              <input
+                id="registerUserCounter"
+                class="knob"
+                data-width="120"
+                data-height="120"
+                data-linecap="round"
+                data-fgColor="#ffbb44"
+                value="<%= userCnt %>"
+                data-skin="tron"
+                data-angleOffset="180"
+                data-readOnly="true"
+                data-thickness=".1"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-7">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">Orders</h4>
+            <ul class="list-inline widget-chart m-t-20 m-b-15 text-center">
+              <% for(var i=0;i<orders.length;i++) { %>
+                <li class="list-inline-item">
+                  <h5 class="mb-0"><%= orders[i].counter %></h5>
+                  <p class="text-muted font-14"><%= orders[i].heading.split(" ")[0] %></p>
+                </li>
+              <% } %>
+            </ul>
+
+            <div class="text-center">
+              <input type="date" id="startDateChart" name="start" />
+              <input type="date" id="endDateChart" name="end" />
+              <br/>
+              <br/>
+              <div class="clearfix">
+                <a
+                  class="btn btn-sm btn-warning getChartData"
+                >View Data</a
+              >
+              </div>
+            </div>
+
+            <canvas id="doughnut" height="175" style="display: block;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+
+<script src="/assets/plugins/peity-chart/jquery.peity.min.js"></script>
+<!--C3 Chart-->
+<script src="/assets/plugins/d3/d3.min.js"></script>
+<script src="/assets/plugins/c3/c3.min.js"></script>
+<!-- Chart JS -->
+<script src="/assets/plugins/chart.js/Chart.min.js"></script>
+<!-- KNOB JS -->
+<script src="/assets/plugins/jquery-knob/excanvas.js"></script>
+<script src="/assets/plugins/jquery-knob/jquery.knob.js"></script>
+<!-- Page specific js -->
+<script src="/assets/pages/dashboard.js"></script>
+
+<script>
+  $(function () {
+    $(document).ready(function() {
+      let myChart=document.getElementById("doughnut").getContext("2d");
+
+      let orderChart=new Chart(myChart,{
+        type:"doughnut",
+        data:{
+          labels:[
+            "<%= orders[0].heading %>",
+            "<%= orders[1].heading %>",
+            "<%= orders[2].heading %>",
+            "<%= orders[3].heading %>",
+          ],
+          datasets:[{
+            label:"Orders By Status",
+            data:[
+            "<%= orders[0].counter %>",
+            "<%= orders[1].counter %>",
+            "<%= orders[2].counter %>",
+            "<%= orders[3].counter %>",
+            ],
+            backgroundColor: ["#67a8e4", "#8d6e63","#4ac18e", "#ebeff2"],
+            hoverBackgroundColor: ["#67a8e4", "#8d6e63","#4ac18e",  "#ebeff2"],
+            hoverBorderColor: "#fff",
+          }]
+        },
+      });
+    });
+
+    $(document).on("click", ".getData", function (e) {
+      e.preventDefault();
+      const data = {
+        start: $("#startDate").val(),
+        end: $("#endDate").val(),
+      };
+      $.ajax({
+        url: `/report`,
+        data: data,
+      }).done(function (res) {
+        console.log("Sample of data:", res);
+        $("#registerUserCounter").val(res.counter);
+      });
+    });
+
+    $(document).on("click", ".getChartData", function (e) {
+      e.preventDefault();
+      const data = {
+        start: $("#startDateChart").val(),
+        end: $("#endDateChart").val(),
+      };
+      $.ajax({
+        url: `/chartReport`,
+        data: data,
+      }).done(function (res) {
+        let myChart=document.getElementById("doughnut").getContext("2d");
+
+        let orderChart=new Chart(myChart,{
+          type:"doughnut",
+          data:{
+            labels:[
+              res.orderCompleted.label,
+              res.orderOngoing.label,
+              res.orderPending.label,
+              res.orderRejected.label,
+            ],
+            datasets:[{
+              label:"Orders By Status",
+              data:[
+                res.orderCompleted.cnt,
+                res.orderOngoing.cnt,
+                res.orderPending.cnt,
+                res.orderRejected.cnt,
+              ],
+              backgroundColor: ["#67a8e4", "#8d6e63","#4ac18e", "#ebeff2"],
+              hoverBackgroundColor: ["#67a8e4", "#8d6e63","#4ac18e",  "#ebeff2"],
+              hoverBorderColor: "#fff",
+            }]
+          },
+        });
+      });
+    });
+  });
+</script>
+
+<%- contentFor('BottomJs') %>

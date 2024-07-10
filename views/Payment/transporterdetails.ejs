@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transporter payment</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+
+<% include ../Partials/HeaderRoot %>
+<div id="preloader">
+  <div id="status"><div class="spinner"></div></div>
+</div>
+
+<!-- Begin page -->
+<div class="accountbg"></div>
+<div class="wrapper-page">
+  <div class="card">
+    <div class="card-body">
+     <div class="p-3">
+        <h2 class="font-18 m-b-5 text-center">Profile</h2>
+        <% include ../Partials/errorMessages %>
+        <form class="form-horizontal m-t-30" action="/updatetransporter" method="post">
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              name="name"
+              id="name"
+              placeholder="Enter Your name"
+              value="<%= name %>"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Phone Number</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              maxlength="10"
+              name="phone_number"
+              id="transporterPhoneNumber"
+              placeholder="Enter Phone Number"
+              value=<%=phone_number %>
+            
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="Enter Your Email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Gst Number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="gstNo"
+              id="transporterGstNumber"
+              placeholder="Enter Your GST Number"
+            />
+          </div>
+       
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="hidden"
+                    id="deep_link"
+                    name="userUid" 
+                    value=<%=userUid %> 
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 text-center">
+              <button
+                class="btn btn-primary w-md waves-effect waves-light"
+                type="submit"
+              >
+             Update Transporter
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../Partials/FooterRoot %>
+

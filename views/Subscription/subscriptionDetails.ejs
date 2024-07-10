@@ -1,0 +1,177 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Subscription Plan Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular Subscription Plan
+            </h4>
+            <br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="vehicleType" class="col-sm-2 col-form-label"
+                  >Vehicle Type</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleType"
+                    name="vehicleTypeName"
+                    placeholder="Enter the type of a Vehicle"
+                    value="<%= subscription.subscriptionData.vehicle_type %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionPlanName"
+                  class="col-sm-2 col-form-label"
+                  >Plan Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPlanName"
+                    name="planName"
+                    placeholder="Enter the name of a Subscription Plan"
+                    value="<%= subscription.subscriptionData.plan_name %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionDescription"
+                  class="col-sm-2 col-form-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionDescription"
+                    name="description"
+                    placeholder="Enter the description for a Subscription Plan"
+                    value="<%= subscription.subscriptionData.description %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPrice" class="col-sm-2 col-form-label"
+                  >Amount</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPrice"
+                    name="amount"
+                    placeholder="Enter the amount for a Subscription Plan"
+                    value="<%= subscription.subscriptionData.amount %>"
+                    readonly
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Amount are in <b>Rupees</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="discounted_price" class="col-sm-2 col-form-label"
+                  >Discounted Price</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="discountedPrice"
+                    name="discountedPrice"
+                    placeholder="Enter the discounted price for a Subscription Plan"
+                    value="<%= subscription.subscriptionData.discounted_price %>"
+                    readonly
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Discounted Price are in <b>Rupees</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPeriod" class="col-sm-2 col-form-label"
+                  >Trial Period</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPeriod"
+                    name="trialPeriod"
+                    placeholder="Enter trial period in days"
+                    value="<%= subscription.subscriptionData.trial_period %>"
+                    readonly
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Trial Period is in <b>Days</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionPlanIsDeleted"
+                  class="col-sm-2 col-form-label"
+                  >Deleted</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text"
+                  id="subscriptionPlanIsDeleted" <%
+                  if(subscription.subscriptionData.is_deleted === false) { %>
+                  value="No" <% } else { %> value="Yes" <% } %> name="isDeleted"
+                  readonly />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="location.href='/subscription/list'"
+              >
+                Back
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

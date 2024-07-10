@@ -1,0 +1,158 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Vehicle's Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Edit the details of a particular Vehicle
+            </h4>
+            <br /><br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="vehicle_type" class="col-sm-2 col-form-label"
+                  >Vehicle Type</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicle_type"
+                    name="vehicleType"
+                    placeholder="Enter your type of the Vehicle"
+                    value="<%= vehicle.vehicleData.vehicle_type %>"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicle_number" class="col-sm-2 col-form-label"
+                  >Vehicle Number</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicle_number"
+                    name="vehicleNumber"
+                    placeholder="Enter your Vehicle Number"
+                    value="<%= vehicle.vehicleData.vehicle_number %>"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="vehicleChassisNumber"
+                  class="col-sm-2 col-form-label"
+                  >Chassis Number</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleChassisNumber"
+                    name="chassisNumber"
+                    value="<%= vehicle.vehicleData.chassis_number %>"
+                    
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="vehicleChassisNumber"
+                  class="col-sm-2 col-form-label"
+                  >Comments</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleComments"
+                    name="Comments"
+                    value="<%= vehicle.vehicleData.comment %>"
+                  
+                  />
+                </div>
+              </div>
+
+            
+
+              <!-- <div class="form-group row">
+                <label for="vehicleIsDeleted" class="col-sm-2 col-form-label"
+                  >Deleted</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="vehicleIsDeleted"
+                  name="isDeleted" <% if( vehicle.vehicleData.is_deleted ===
+                  false ) { %> value="No" <% } else { %> value="Yes" <% } %>
+                  readonly />
+                </div>
+              </div> -->
+
+              <div class="form-group row">
+                <label for="vehicleIcons" class="col-sm-2 col-form-label"
+                  >Images</label
+                >
+                <div class="col-sm-10">
+                <% if(vehicle.vehicleData.vehicle_photos.length>=1) { %>
+                  <% for(var i=0;i<vehicle.vehicleData.vehicle_photos.length;i++) { %>
+                    <img
+                      src="<%= vehicle.vehicleData.vehicle_photos[i] %>"
+                      height="100px"
+                      width="100px"
+                    />&nbsp;
+                  <% } %>
+                 <% } else { %>
+                    <h6>No images Available</h6>
+                 <% } %>
+                </div>
+              </div>
+             <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="window.history.back()"
+              >
+                Display Vehicles
+              </button>
+              <button
+              type="submit"
+              class="btn btn-primary btn-group waves-effect"
+              >
+              Update Vehicle
+             </button>
+              <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+            %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

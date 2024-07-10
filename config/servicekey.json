@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "logistics-ondemand-app",
+  "private_key_id": "21874a25b1796eb428cc8540caf6f1e9862443f7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDRi9cvNBnZCt8Z\nYltLWpZqdEDEirQJv/uO6NrSNreI99KpYwRKUgbdZaFIPFNKayRLJsefmhMz8SIM\ncYqng2q6nodTv0icGKIJJe8r5li31PT3HbHhz+codDUiNC/AGlYxBqFb2ORE46T0\n91fUcRDULCwDyJaekB0YaPiJSP6cpq/A/g9I5+UJOVafUwdn+Iy5+xkCdxrzhsjp\nXJn8iCLUXQ/25cAc9944WJNrfiqRpKkRi5srBnK7vGiwAb1QvX5ZbvLz7tfL0qz+\na80NJ9pSRHPkz2KaiUmVwfpizutIJsWWMHMn9+Uj8gdk1NQcSmamC6ofMIUjaBOE\nXmdfaksXAgMBAAECggEAKsXaN0rxycFz18khbIjBslonjFbpuCHFlh7G5+j+XsmD\naUsKaadDunaPzOBvef3TyzlPvy7io5QhiJu2m0nyg8RvSDN//Ujz7l0dbH8Y9fFU\nzYp0sGzROQs7e09evd5CYMCDOG3V7o/vMIe6mGU5861OkLklsZkmL0DiFpfdTRlE\nYwunUGgWTekNxCCwxObmQSwl5kJlvlnN9pLgKdsWzkhzz/6it665IHaTqMESJsva\nX0ZFKL/FSQ9Pu/OK3jeyUKy+eN/ljc+pzk2Qc8GIsQhFwcLBevuFe45pmKE6VgNW\nsfva6VANJUTHhrfnHaNxVi9OPA9LhJPCCY47fs7tXQKBgQD7EBxVWK2e5bLLFCXX\nGR+eKeuElfDqFOfeSu6V2991ylmKYIAahqnFaoGx1kFNKkyUyXtIG/IsBmeGGq9i\nEMm1r1bjTk/qu9d/NLMT2yS8iGLKwI9ImOZxckiB+CiOe+AwAVlM5QXA5ZYsju8X\n2IHHzlyOTVUx/Yjy9cikphu3ZQKBgQDVqrqCLscMZOOt+fzmQdJa/7wCQqDi6+Qe\nNqeuBJmLnCLO8GqqhyGArv8wqxF2/yUnSpFkgGXiNMKqi9gCjmRatTr5GgzqQUNq\n1ZufDuWSCFz7JqH2KyS0u/7Kzvei5nrfAJ3p8wNRRoWiS+UlNYt/pbwYKtANRean\nvdZzcx2GywKBgQDeETH+i6GGmsW6uud9istcqteXPskJQ9ST2tON2h2doo3wx8qH\nq/UemUZ+dnTsPC3grRZOgemC52dKRvA6XX8NJTpFdE9b4SqLaaG8PmoQGNLJY+lY\n3WV3kw5vZ4D4BroVvBuw2CJurKRYZVU2Ulr40J8tf1mMDiXEQYJnoEWDwQJ/W88A\nVO/El47CRf8kq8ucl31LS61VdCvn2ROi+SMA1vw/+KtVKfDmdGS9Qiw/VOJNFJT1\n5DlHjesduipcpryIYnF85YxMAFwKm90tAStleVoemcv/y8a9/urIkFxeC6D9KtUZ\nBW1l/4ZN5W63B0X6qt6L89Zxj0J52Zm4i+LqzQKBgQD5mryBJ50ZBk6Ey5wWExan\nGxRVUWr5l9OJCqNoJBjvEwKQxtHzttqmLDOHS12A18awVmppEUFWKQPNSh1amiKe\nWZ6Uf6/WLkYTaS/fJjAF6O2fymwn17jsEQOdlVMYnr0RC/KnPcEXYo9eyANd365m\nWQ5v1T2eqC+fXPmMZVjtvA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-mkhrr@logistics-ondemand-app.iam.gserviceaccount.com",
+  "client_id": "114999687570053429229",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-mkhrr%40logistics-ondemand-app.iam.gserviceaccount.com"
+}

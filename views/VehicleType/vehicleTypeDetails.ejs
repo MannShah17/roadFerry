@@ -1,0 +1,246 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Vehicle Type's Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular vehicle type
+            </h4>
+            <br /><br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="vehicleTypeName" class="col-sm-2 col-form-label"
+                  >Vehicle Type Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleTypeName"
+                    name="name"
+                    placeholder="Enter your Name of the Vehicle"
+                    value="<%= vehicle.vehicle_type %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleCapacity" class="col-sm-2 col-form-label"
+                  >Capacity</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleCapacity"
+                    name="capacity"
+                    placeholder="Enter the capacity of the vehicle"
+                    value="<%= vehicle.vahicle_capacity %>"
+                    readonly
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >The capacity is in tons.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Dimensions</label>
+                <div class="col-sm-10">
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Length</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleLength"
+                      name="vehicleLength"
+                      placeholder="Enter vehicle's Length"
+                      value="<%= vehicle.dimensions.v_length %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Width</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleWidth"
+                      name="vehicleWidth"
+                      placeholder="Enter vehicle's Width"
+                      value="<%= vehicle.dimensions.v_width %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Height</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="vehicleHeight"
+                      name="vehicleHeight"
+                      placeholder="Enter vehicle's Heigth"
+                      value="<%= vehicle.dimensions.v_height %>"
+                      readonly
+                    />
+                  </div>
+                  <div>
+                    <small class="form-text text-muted"
+                      >The dimentions are in feet.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleIcons" class="col-sm-2 col-form-label"
+                  >Images</label
+                >
+                <div class="col-sm-10">
+                  
+                    <img height="100px" width="100px" src="<%= vehicle.icon %>" />&nbsp;
+                  
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="vehicleminimumRate" class="col-sm-2 col-form-label"
+                  >Minimum Rate</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="vehicleminimumRate"
+                    name="name"
+                    placeholder="Enter Minimum Rate"
+                    value="<%= vehicle.minimumRate %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row" id="div_rate" name="rates[]">
+                <label class="col-sm-2 col-form-label">Rates</label>
+                <div class="col-sm-10 rates_input_div">
+                  <% for(var i=0;i<vehicle.rates.length;i++) { %>
+                    <div>
+                      <div
+                        class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                      >
+                        <span
+                          class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                          ><span class="input-group-text">Start</span></span
+                        >
+                        <input
+                          id="kmFrom_<%= i %>"
+                          class="form-control km-from"
+                          type="text"
+                          name="kmFrom"
+                          placeholder="Enter Kilometer"
+                          value="<%= vehicle.rates[i].start %>"
+                          readonly
+                        />
+                        &nbsp;
+                        <span
+                          class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                          ><span class="input-group-text">End</span></span
+                        >
+                        <% if(vehicle.rates[i].end === "-1") { %>
+                          <input
+                            id="kmTo_<%= i %>"
+                            class="form-control km-to"
+                            type="text"
+                            name="kmTo"
+                            placeholder="Enter Kilometers"
+                            value="Onwards"
+                            readonly
+                          />
+                        <% } else { %>
+                          <input
+                            id="kmTo_<%= i %>"
+                            class="form-control km-to"
+                            type="text"
+                            name="kmTo"
+                            placeholder="Enter Kilometers"
+                            value="<%= vehicle.rates[i].end %>"
+                            readonly
+                          />
+                        <% } %>
+                        &nbsp;
+                        <span
+                          class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                          ><span class="input-group-text">Price</span></span
+                        >
+                        <input
+                          id="price_<%= i %>"
+                          class="form-control"
+                          type="text"
+                          name="price"
+                          placeholder="Enter price"
+                          value="<%= vehicle.rates[i].rate %>"
+                          readonly
+                        />
+                        &nbsp;
+                      </div>
+                    </div>
+                    <br />
+                  <% } %>
+                  <small class="form-text text-muted"
+                    >"-1" value Which meanch onwards</small
+                  >
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="location.href='/vehicle-type/list'"
+              >
+                Back
+              </button>
+
+              <!-- <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

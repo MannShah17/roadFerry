@@ -1,0 +1,1103 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Add Transporter</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Transporter Details
+            </h4>
+            <br />
+            <div class="row">
+              <div class="col-12">
+                <div class="card m-b-20">
+                  <div class="card-body">
+                    <% include ../../Partials/errorMessages %>
+                    <form
+                      method="POST"
+                      class="form-horizontal"
+                      enctype="multipart/form-data"
+                    >
+                      <div class="form-group row">
+                        <label
+                          for="transporterFirstName"
+                          class="col-sm-2 col-form-label"
+                          >First Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterFirstName"
+                            name="firstname"
+                            placeholder="Enter your First Name"
+                           
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="transporterLastName" class="col-sm-2 col-form-label"
+                          >Last Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterLastName"
+                            name="lastname"
+                            placeholder="Enter your Last Name"
+                         
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row verification_msg">
+                        <label
+                          for="transporterPhoneNumber"
+                          class="col-sm-2 col-form-label"
+                          >Phone Number</label
+                        >
+                        <div class="col-sm-10">
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">+91</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="transporterPhoneNumber"
+                              name="phone"
+                              placeholder="Enter your Phone Number"
+                              
+                            />
+                            <span data-toggle="modal" data-target="#removeModal"><button type="button" id="verification_button" data-toggle="tooltip" data-original-title="Verification" class="btn btn-danger">Verification</button></span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalLabel">
+                                Enter Verification Code
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div role="form" id="modalForm" class="remove_form">
+                                <div>
+                                  <div id="recaptcha-container"></div>
+                                  </div>
+                                <div>
+                                  <br>
+                                  <div class="form-group row verification_msg">
+                                    
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="code"
+                                        name="code"
+                                        placeholder="Enter Verification Code"
+                                        required
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              <div class="modal-footer">
+                                <button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="verifyButton" data-dismiss="modal" class="btn btn-danger">submit</button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      
+                        <!-- <div>
+                          <button
+                          type="button"
+                          class="btn btn-group btn-danger waves-effect"
+                          id="codeButton"
+                        >
+                          Recaptcha
+                        </button>
+                      </div>
+                        <div id="recaptcha-container"></div>
+                        
+                      
+                        <div class="form-group row">
+                          <label for="code" class="col-sm-2 col-form-label"
+                            >Verification</label
+                          >
+                          <div class="col-sm-10">
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="code"
+                              name="code"
+                              placeholder="Enter your Verification Code"
+                            
+                            />
+                          </div>
+                        </div>
+                        <div>
+                        <button
+                        type="button"
+                        class="btn btn-group btn-danger waves-effect"
+                        id="verifyButton"
+                      >
+                        Verify Transporter
+                      </button>
+                    </div> -->
+                   
+                  <div class="form-group row">
+                  
+                    <div class="col-sm-10">
+                      <input
+                        class="form-control"
+                        type="hidden"
+                        id="codeHidden"
+                        name="userUid" 
+                      />
+                    </div>
+                  </div>
+                  
+                      <div class="form-group row">
+                        <label for="transporterEmail" class="col-sm-2 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="email"
+                            id="transporterEmail"
+                            name="email"
+                            placeholder="Enter your Email ID"
+                          
+                          />
+                        </div>
+                      </div>
+
+                      <!-- <div class="form-group row">
+                        <label for="transporterPassword" class="col-sm-2 col-form-label"
+                          >Password</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="password"
+                            id="transporterPassword"
+                            name="password"
+                            placeholder="Enter your password"
+                         
+                          />
+                        </div>
+                      </div> -->
+
+                      <div class="form-group row">
+                        <label for="transporterAddress" class="col-sm-2 col-form-label"
+                          >Address</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterAddress"
+                            name="address"
+                            placeholder="Please enter your address"
+                          
+                          />
+                          <br />
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">Area</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="area"
+                              name="area"
+                              placeholder="Enter the area"
+                             
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">City</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="city"
+                              name="city"
+                              placeholder="Enter the city"
+                            
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">Pincode</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="pincode"
+                              name="pincode"
+                              placeholder="Enter your pincode"
+                             
+                            />
+                          </div>
+                          <br />
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">State</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="state"
+                              name="state"
+                              placeholder="Enter the State"
+                            
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">Country</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="country"
+                              name="country"
+                              placeholder="Enter the Country"
+                          
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="transporterStatus" class="col-sm-2 col-form-label"
+                          >Status</label
+                        >
+                        <div class="col-sm-10">
+                          <select
+                            id="transporterStatus"
+                            name="status"
+                            class="form-control"
+                          >
+                            <option disabled>Select</option>
+                            <option value="true">Active</option>
+                            <option value="false" selected>In-Active</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterRegisterNumber"
+                          class="col-sm-2 col-form-label"
+                          >Register Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterRegisterNumber"
+                            name="registerNo"
+                            placeholder="Enter your Register Number"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterGstNumber"
+                          class="col-sm-2 col-form-label"
+                          >GST Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterGstNumber"
+                            name="gstNo"
+                            placeholder="Enter your GST Number"
+                          />
+                        </div>
+                      </div>
+
+                      <!-- <div class="form-group row">
+                        <label
+                          for="transporterRegistered"
+                          class="col-sm-2 col-form-label"
+                          >Registered</label
+                        >
+                        <div class="col-sm-10">
+                          <select
+                            id="transporterRegistered"
+                            name="registered"
+                            class="form-control"
+                          >
+                            <option disabled >Select</option>
+                            <option value="true" selected>Registered</option>
+                            <option value="false">Non-Registered</option>
+                          </select>
+                        </div>
+                      </div> -->
+
+                      <!-- <div class="form-group row">
+                        <label
+                          for="transporterDocumentType"
+                          class="col-sm-2 col-form-label"
+                          >Identity Document</label
+                        >
+                        <div class="col-sm-10">
+                          <select
+                            id="transporterDocumentType"
+                            name="documentType"
+                            class="form-control"
+                          >
+                            <option disabled>Select the Document Type</option>
+                            <option>PAN</option>
+                            <option>Aadhar Card</option>
+                            <option selected>Passport</option>
+                            <option>Election Card</option>
+                          </select>
+                        </div>
+                      </div> -->
+
+                      <!-- <div class="form-group row">
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li class="nav-item">
+                            <a
+                              class="nav-link active"
+                              data-toggle="tab"
+                              href="#addDriver"
+                              role="tab"
+                            >
+                              <span>Add Driver</span>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a
+                              class="nav-link"
+                              data-toggle="tab"
+                              href="#addVehicle"
+                              role="tab"
+                            >
+                              <span>Add Vehicle</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="tab-content">
+                        <div class="tab-pane active p-3" id="addDriver" role="tabpanel"> -->
+                          <!-- <p>I am in Driver Tab</p> -->
+                          <br/>
+                          <h4 class="mt-0 header-title">Driver Details</h4>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="card m-b-20">
+                                <div class="card-body">
+                                  <!-- <h4 class="mt-0 header-title">Driver Details</h4>
+                                  <br /> -->
+                                  <div class="form-group row">
+                                    <label
+                                      class="col-sm-2 col-form-label"
+                                      >Transporter As Driver</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        style="width: 30px;height: 30px;"
+                                        type="hidden"
+                                        id="chbTransporterAsDriverHidden"
+                                        value="unchecked"
+                                        class="chb_transporterAsDriver"
+                                      />
+                                      <input
+                                        style="width: 30px;height: 30px;"
+                                        type="checkbox"
+                                        id="chbTransporterAsDriver"
+                                        value="checked"
+                                        class="chb_transporterAsDriver"
+                                        name="TransporterAsDriver"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverFirstName"
+                                      class="col-sm-2 col-form-label"
+                                      >First Name</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="driverFirstName"
+                                        name="FirstName"
+                                        placeholder="Enter your First Name"
+                                      
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverLastName"
+                                      class="col-sm-2 col-form-label"
+                                      >Last Name</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="driverLastName"
+                                        name="LastName"
+                                        placeholder="Enter your Last Name"
+                                      
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverEmail"
+                                      class="col-sm-2 col-form-label"
+                                      >Email</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="driverEmail"
+                                        name="Email"
+                                        placeholder="Enter your email"
+                                       
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                  
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="hidden"
+                                        id="driverUid"
+                                        name="driverUid" 
+                                      />
+                                    </div>
+                                  </div>
+                                  
+                                  
+                      <div class="form-group row error_msg">
+                        <label
+                         for="driverPhone"
+                          class="col-sm-2 col-form-label"
+                          >Phone Number</label
+                        >
+                        <div class="col-sm-10">
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">+91</span></span
+                            >
+                            <input
+                            class="form-control"
+                            type="text"
+                            id="driverPhone"
+                            name="Phone"
+                            placeholder="Enter your phone number"
+                              
+                            />
+                            <span data-toggle="modal" data-target="#removeModal2"><button type="button" id="driverVerification_button" data-toggle="tooltip" data-original-title="driverVerification" class="btn btn-danger">Verification</button></span>
+                          </div>
+                        </div>
+                        </div>
+
+                                  <!-- <div class="form-group row">
+
+                                    <label
+                                      for="driverPhone"
+                                      class="col-sm-2 col-form-label"
+                                      >Phone Number</label
+                                    >
+                                    <div
+                                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                                  >
+                                    <span
+                                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                                      ><span class="input-group-text">+91</span></span
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="driverPhone"
+                                        name="Phone"
+                                        placeholder="Enter your phone number"
+                                      
+                                      />
+                                      </div>
+                                    </div>
+                                  </div> -->
+                                 
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverAge"
+                                      class="col-sm-2 col-form-label"
+                                      >Age</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="driverAge"
+                                        name="Age"
+                                        placeholder="Enter your age"
+                                     
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverProfilePhoto"
+                                      class="col-sm-2 col-form-label"
+                                      >Profile Image</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        type="file"
+                                        id="driverProfilePhoto"
+                                        name="profile"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverAddressProof"
+                                      class="col-sm-2 col-form-label"
+                                      >Address Proof</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        type="file"
+                                        id="driverAddressProof"
+                                        name="AddressProof"
+                                      />
+                                      <div>
+                                        <small class="form-text text-muted"
+                                          >Please upload any of this
+                                          <b>PAN Card, Aadhar Card, Voter ID</b>
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="driverIdentityProof"
+                                      class="col-sm-2 col-form-label"
+                                      >Identity Proof</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        type="file"
+                                        id="driverIdentityProof"
+                                        name="IdentityProof"
+                                      />
+                                      <div>
+                                        <small class="form-text text-muted"
+                                          >Please upload your <b>Driving License</b>
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br/>
+                        <!-- </div>
+                        <div class="tab-pane p-3" id="addVehicle" role="tabpanel"> -->
+                          <!-- <p>I am in Vehicle Tab</p> -->
+                          <h4 class="mt-0 header-title">Vehicle Details</h4>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="card m-b-20">
+                                <div class="card-body">
+                                  <!-- <h4 class="mt-0 header-title">Vehicle Details</h4>
+                                  <br /> -->
+                                  <div class="form-group row">
+                                    <label
+                                      for="vehicleType"
+                                      class="col-sm-2 col-form-label"
+                                      >Vehicle Type</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <select
+                                        id="vehicleType"
+                                        name="vehicleTypeName"
+                                        class="form-control"
+                                      >
+                                        <option disabled selected>Select</option>
+                                        <% for(var i=0;i<vehicleTypes.length;i++) { %>
+                                          <option value="<%= vehicleTypes[i] %>">
+                                            <%= vehicleTypes[i] %>
+                                          </option>
+                                        <% } %>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="vehicleNumber"
+                                      class="col-sm-2 col-form-label"
+                                      >Vehicle Number</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="vehicleNumber"
+                                        name="VehicleNumber"
+                                        placeholder="Enter your Vehicle Number"
+                                      
+                                      />
+                                      <div>
+                                        <small class="form-text text-muted"
+                                          >Please Enter your vehicle number in this
+                                          format <b>GJ-01-AA-0000</b>
+                                        </small>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="vehicleChassisNumber"
+                                      class="col-sm-2 col-form-label"
+                                      >Chassis Number</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="vehicleChassisNumber"
+                                        name="ChassisNumber"
+                                        placeholder="Enter your Chassis Number"
+                                       
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="vehicleComments"
+                                      class="col-sm-2 col-form-label"
+                                      >Comments</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="vehicleComments"
+                                        name="Comments"
+                                        placeholder="Enter comments about vehicle"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label
+                                      for="vehicleIcons"
+                                      class="col-sm-2 col-form-label"
+                                      >Images</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        type="file"
+                                        id="vehicleIcons"
+                                        name="icons"
+                                        multiple
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- </div>
+                      </div> -->
+
+                      <button
+                        type="submit"
+                        class="btn btn-group btn-primary waves-effect"
+                        id="submit"
+                      >
+                        Add Transporter
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-group btn-danger waves-effect"
+                        onclick="location.href='/dashboard'"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">
+                              Enter Verification Code
+                            </h5>
+                            <button type="button" class="close" id="close-button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form role="form" id="modalForm" class="remove_form">
+                              <div>
+                                <div id="recaptcha-container"></div>
+                                <div id="recaptcha-error"></div>
+                                </div>
+                              <div>
+                                <br>
+                                <div class="form-group row">
+                                  
+                                  <div class="col-sm-10">
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      id="code"
+                                      name="code"
+                                      placeholder="Enter Verification Code"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            <div class="modal-footer">
+                              <button type="button" id="btnModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" id="verifyButton" disabled="true" data-dismiss="modal" class="btn btn-danger">submit</button>
+                            </div>
+                          </form>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal fade" id="removeModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">
+                              Enter Verification Code
+                            </h5>
+                            <button type="button" class="close" id="driver-close-button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form role="form" id="modalForm2" class="remove_form">
+                              <div>
+                                <div id="driver-recaptcha-container"></div>
+                                <div id="driver-recaptcha-error"></div>
+                                </div>
+                              <div>
+                                <br>
+                                <div class="form-group row">
+                                  
+                                  <div class="col-sm-10">
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      id="driverCode"
+                                      name="driverCode"
+                                      placeholder="Enter Verification Code"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            <div class="modal-footer">
+                              <button type="button" id="driverBtnModalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" id="driverVerifyButton" disabled="true" data-dismiss="modal" class="btn btn-danger">submit</button>
+                            </div>
+                          </form>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+  var config = {
+  apiKey: "AIzaSyALoyUbKfKhksdyblkTeucUUr6o-yhKbMA",
+  authDomain: "logistics-ondemand-app.firebaseapp.com",
+  databaseURL: "https://logistics-ondemand-app.firebaseio.com",
+  projectId: "logistics-ondemand-app",
+  storageBucket: "logistics-ondemand-app.appspot.com",
+  messagingSenderId: "335686843365",
+  appId: "335686843365:web:d4bb2a7c82af72fcdf8d0c",
+  measurementId: "G-7WPCXTQJ8N"
+  };
+firebase.initializeApp(config);
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+window.driverRecaptchaVerifier = new firebase.auth.RecaptchaVerifier('driver-recaptcha-container');
+var myResult;
+$(document).ready(function() {
+   /* verification for phone number */ 
+   $("#transporterPhoneNumber").on("input", function() {
+    let transporterNumber = $("#transporterPhoneNumber").val();
+    if(this.value == transporterNumber) {
+        $("#verification_button").attr("disabled", false)
+        $("#code").val("")
+    }
+   });
+   $("#code").on("input", function(){
+       if(this.value) {
+        $("#verifyButton").attr("disabled", false)
+       } else {
+        $("#verifyButton").attr("disabled", true)
+       }
+   })
+  $("#verification_button").click(function () {
+    const phoneNumberString = "+91"+ $("#transporterPhoneNumber").val();
+    firebase.auth().signInWithPhoneNumber(phoneNumberString, window.recaptchaVerifier)
+    .then( confirmationResult => {
+      console.log(confirmationResult,"result1");
+      window.confirmationResult = confirmationResult;
+      myResult = confirmationResult;
+      window.confirmationResult = null;
+    //   window.recaptchaVerifier.reset();
+    })
+    .catch(function (error) {
+    var html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p>${error.message}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>`;
+    $("#recaptcha-error").append(html);
+      console.error("SMS not sent", error);
+   });
+  });
+  $("#btnModalClose").click(function () {
+      $("#code").val("")
+      $('#recaptcha-error').remove();
+      $("#modalForm div").append("<div id='recaptcha-error'></div>");
+      window.recaptchaVerifier.reset();
+  })
+  $("#close-button").click(function () {
+      $("#code").val("")
+      $('#recaptcha-error').remove();
+      $("#modalForm div").append("<div id='recaptcha-error'></div>");
+      window.recaptchaVerifier.reset();
+  })
+  $("#verifyButton").click(function () {
+    const code = $("#code").val();
+    if(myResult) {    
+        myResult.confirm(code).then((result) => {
+        console.log(result,'data')
+        user_uid = result.user.uid;
+        console.log(user_uid,"UserData");
+        $("#codeHidden").val(user_uid);
+        $("#verification_button").attr("disabled", true)
+        window.recaptchaVerifier.reset();
+    }).catch((error) => {
+    let html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p>Phone number not verified</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`;
+    $(".verification_msg").append(html);
+        console.error("Verification not completed", error);
+    });
+    } else {
+    let html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p>Please confirm you are not robot</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`;
+        $("#verifyButton").attr("data-dismiss", "");
+        $("#recaptcha-error").append(html)
+    }
+  });
+  
+  /* verification for driver phone number */
+  $("#driverPhone").on("input", function() {
+    let driverNumber = $("#driverPhone").val();
+    if(this.value == driverNumber) {
+        $("#driverVerification_button").attr("disabled", false)
+        $("#driverCode").val("")
+    }
+   });
+   $("#driverCode").on("input", function(){
+       if(this.value) {
+        $("#driverVerifyButton").attr("disabled", false)
+       } else {
+        $("#driverVerifyButton").attr("disabled", true)
+       }
+   }) 
+  $("#driverVerification_button").click(function () {
+  const phoneNumber = "+91"+ $("#driverPhone").val();
+    firebase.auth().signInWithPhoneNumber(phoneNumber, window.driverRecaptchaVerifier)
+    .then( confirmationResults => {
+      console.log(confirmationResults,"result");
+      window.confirmationResult = confirmationResults;
+      myResult2 = confirmationResults;
+    //   window.driverRecaptchaVerifier.reset();
+    })
+    .catch(function (error) {
+    var html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p>${error.message}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>`;
+    $("#driver-recaptcha-error").append(html);
+      console.error("SMS not sent", error);
+   });
+  });
+  $("#driverBtnModalClose").click(function () {
+      $('#driver-recaptcha-error').remove();
+      $("#modalForm2 div").append("<div id='driver-recaptcha-error'></div>");
+      $("#driverCode").val("")
+      window.driverRecaptchaVerifier.reset();
+  })
+  $("#driver-close-button").click(function () {
+      $('#driver-recaptcha-error').remove();
+      $("#modalForm2 div").append("<div id='driver-recaptcha-error'></div>");
+      $("#driverCode").val("")
+      window.driverRecaptchaVerifier.reset();
+  })
+  $("#driverVerifyButton").click(function () {
+    const driver_code = $("#driverCode").val();
+    if(myResult2) {
+    myResult2.confirm(driver_code).then((result) => {
+    console.log(result,'data2')
+    let driver_uid = result.user.uid;
+    console.log(user_uid,"UserData2");
+    $("#driverUid").val(driver_uid);
+    $("#driverVerification_button").attr("disabled", true)
+    window.driverRecaptchaVerifier.reset();
+    }).catch((error) => {
+    let html2 = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p>Phone number not verified</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`;
+    $(".error_msg").append(html2);
+    console.error("Verification not completed", error);
+    });
+    } else {
+        let html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p>Please confirm you are not robot</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`;
+        $("#driverVerifyButton").attr("data-dismiss", "");
+        $("#driver-recaptcha-error").append(html)
+    }
+  });
+});
+// $(document).ready(function() {
+  
+// });
+
+// var myResult2;
+// $(document).ready(function() {
+// });
+// $(document).ready(function() {
+// });
+
+$(function(){
+    $(document).on("click", ".chb_transporterAsDriver", function () {
+      if ($(this).is(":checked") == true) {
+        const transporterEmail = $("#transporterEmail").val();
+        const transporterPhone = $("#transporterPhoneNumber").val();
+        const transporterLastName = $("#transporterLastName").val();
+        const transporterFirstName = $("#transporterFirstName").val();
+
+        $("#driverFirstName").val(transporterFirstName);
+        $("#driverFirstName").attr("readonly", true);
+
+        $("#driverLastName").val(transporterLastName);
+        $("#driverLastName").attr("readonly", true);
+
+        $("#driverEmail").val(transporterEmail);
+        $("#driverEmail").attr("readonly", true);
+        
+        $("#driverPhone").val(transporterPhone);
+        $("#driverPhone").attr("readonly", true);
+      } else {
+        $("#driverFirstName").val("");
+        $("#driverFirstName").attr("readonly", false);
+
+        $("#driverLastName").val("");
+        $("#driverLastName").attr("readonly", false);
+
+        $("#driverEmail").val("");
+        $("#driverEmail").attr("readonly", false);
+
+        $("#driverPhone").val("");
+        $("#driverPhone").attr("readonly", false);
+      }
+    });
+  });
+</script>
+<%- contentFor('BottomJs') %>

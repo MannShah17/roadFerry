@@ -1,0 +1,230 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Add Admin</h3>
+  </li>
+</ul>
+<style>
+  #overlay{	
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 80%;
+    height:100%;
+    display: none;
+    background: rgba(199, 197, 197, 0.6);
+  }
+  .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+  @keyframes sp-anime {
+    100% { 
+      transform: rotate(360deg); 
+    }
+  }
+  .is-hide{
+    display:none;
+  }
+  </style>
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">Add a new admin to the system.</h4>
+            <br />
+            <% include ../../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="adminFirstName" class="col-sm-2 col-form-label"
+                  >First Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="adminFirstName"
+                    name="firstname"
+                    placeholder="Enter your First Name"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="adminLastName" class="col-sm-2 col-form-label"
+                  >Last Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="adminLastName"
+                    name="lastname"
+                    placeholder="Enter your Last Name"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="adminPhoneNumber" class="col-sm-2 col-form-label"
+                  >Phone Number</label
+                >
+                <div class="col-sm-10">
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">+91</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="adminPhoneNumber"
+                      name="phone"
+                      placeholder="Enter your Phone Number"
+                     
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="adminEmail" class="col-sm-2 col-form-label"
+                  >Email</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="adminEmail"
+                    name="email"
+                    placeholder="Enter your Email ID"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="adminPassword" class="col-sm-2 col-form-label"
+                  >Password</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="adminPassword"
+                    name="password"
+                    placeholder="Enter your Password"
+                   
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="adminDocumentType" class="col-sm-2 col-form-label"
+                  >Identity Document</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    id="adminDocumentType"
+                    name="documentType"
+                    class="form-control"
+                  >
+                    <option disabled>Select the Document Type</option>
+                    <option>PAN</option>
+                    <option>Aadhar Card</option>
+                    <option selected>Passport</option>
+                    <option>Election Card</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <label for="adminStatus" class="col-sm-2 col-form-label"
+                  >Status</label
+                >
+                <div class="col-sm-1">
+                  <input
+                    class="form-control"
+                    type="checkbox"
+                    id="adminStatus"
+                    name="status"
+                    onclick="myFunction()"
+                  />
+                </div>
+              </div> -->
+
+              <!-- <div class="form-group row">
+                <label for="adminStatus" class="col-sm-2 col-form-label"
+                  >Status</label
+                >
+                <div class="col-sm-10">
+                  <select id="adminStatus" name="status" class="form-control">
+                    <option disabled selected>Select</option>
+                    <option value="true">Active</option>
+                    <option value="false">In-Active</option>
+                  </select>
+                </div>
+              </div> -->
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-group waves-effect"
+              >
+                Add an Admin
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<script>
+  
+  var $loading = $('#overlay').hide();
+  $(document)
+  .ajaxStart(function () {
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
+</script>
+<%- contentFor('BottomJs') %>

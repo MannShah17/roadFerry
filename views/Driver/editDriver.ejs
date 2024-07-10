@@ -1,0 +1,279 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Edit Driver</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Edit the details of a particular Driver
+            </h4>
+            <br /><br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="driverPhoto" class="col-sm-2 col-form-label"
+                  >Photo</label
+                >
+                <div class="col-sm-10">
+                  <img
+                    class="d-flex mr-3 thumbnail thumb-lg"
+                    src="<%= driver.driverData.driver_photo %>"
+                    alt="Driver's image"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverFirstName" class="col-sm-2 col-form-label"
+                  >First Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="driverFirstName"
+                    name="firstname"
+                    placeholder="Enter your First Name"
+                    value="<%= driver.driverData.first_name %>"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverLastName" class="col-sm-2 col-form-label"
+                  >Last Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="driverLastName"
+                    name="lastname"
+                    value="<%= driver.driverData.last_name %>"
+                    placeholder="Enter your Last Name"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverEmail" class="col-sm-2 col-form-label"
+                  >Email</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="driverEmail"
+                    name="email"
+                    placeholder="Enter your Email"
+                    value="<%= driver.driverData.email %>"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverPhoneNumber" class="col-sm-2 col-form-label"
+                  >Phone Number</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="driverPhoneNumber"
+                    name="phone"
+                    placeholder="Enter your Phone Number"
+                    value="<%= driver.driverData.phone_number %>"
+                    
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverAge" class="col-sm-2 col-form-label"
+                  >Age</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="driverAge"
+                    name="age"
+                    placeholder="Enter your Age"
+                    value="<%= driver.driverData.age %>"
+                    
+                  />
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <label for="verifyDriver" class="col-sm-2 col-form-label"
+                  >Verified</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="verifyDriver"
+                  name="is_verified" <% if( driver.driverData.is_verified ===
+                  "pending" ) { %> value="Pending" <% } else { %>
+                  value="Verified" <% } %> readonly />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverStatus" class="col-sm-2 col-form-label"
+                  >Status</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="driverStatus"
+                  name="status" <% if( driver.driverData.status === true ) { %>
+                  value="Active" <% } else { %> value="In-Active" <% } %>
+                  readonly />
+                </div>
+              </div> -->
+
+              <!-- <div class="form-group row">
+                <label for="driverIsDeleted" class="col-sm-2 col-form-label"
+                  >Deleted</label
+                >
+
+                value="<%= driver.driverData.first_name %>"
+                  value="<%= driver.driverData.age %>"
+                    value="<%= driver.driverData.phone_number %>"
+                      value="<%= driver.driverData.email %>"
+                       value="<%= driver.driverData.last_name %>"
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="driverIsDeleted"
+                  name="isDeleted" <% if( driver.driverData.is_deleted === false
+                  ) { %> value="No" <% } else { %> value="Yes" <% } %> readonly
+                  />
+                </div>
+              </div> -->
+
+              <!-- <% if( driver.driverData.is_deleted === true ) { %>
+                <div class="form-group row">
+                  <label for="driverRemoveReason" class="col-sm-2 col-form-label"
+                    >Reason for delete a driver</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="driverRemoveReason"
+                      name="reason"
+                      placeholder="Reason for deleting the driver"
+                      value="<%= driver.driverData.reason %>"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <% } %> -->
+
+              <div class="form-group row">
+                <label for="driverAddressPhoto" class="col-sm-2 col-form-label"
+                  >Address Proof</label
+                >
+                <div class="col-sm-10">
+                  <img
+                    class="d-flex mr-3 thumbnail thumb-lg"
+                    src="<%= driver.driverData.address_proof %>"
+                    alt="driver address_proof"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="driverIdentityPhoto" class="col-sm-2 col-form-label"
+                  >Identity Proof</label
+                >
+                <div class="col-sm-10">
+                  <img
+                    class="d-flex mr-3 thumbnail thumb-lg"
+                    src="<%= driver.driverData.identity_proof %>"
+                    alt="driver identity_proof"
+                  />
+                </div>
+              </div>
+
+              <button
+              type="button"
+              class="btn btn-primary btn-group waves-effect"
+              onclick="window.history.back()"
+            >
+              Display Driver
+            </button>
+            <button
+            type="submit"
+            class="btn btn-primary btn-group waves-effect"
+            >
+            Update Driver
+           </button>
+            <button
+              id="btnCancel"
+              name="btnCancel"
+              type="button"
+              class="btn btn-danger btn-group waves-effect"
+              onclick="location.href='/driver/list'"
+            >
+              Cancel
+            </button>
+
+              <!-- <% if(driver.driverData.is_verified === "pending") { %>
+              <button
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/driver/<%= driver.transporterId %>/rejectDriver/<%= driver.id %>'"
+              >
+                Reject
+              </button>
+              <button
+                type="button"
+                class="btn btn-success btn-group waves-effect"
+                onclick="location.href='/driver/<%= driver.transporterId %>/verifyDriver/<%= driver.id %>'"
+              >
+                Verify
+              </button>
+              <% } else { %>
+              <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="location.href='/transporter/transporterDetails/<%= driver.transporterId %>'"
+              >
+                Display Drivers
+              </button>
+              <% } %> -->
+
+              <!-- <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+
+                  
+              >
+                Cancel
+              </button> -->
+            </form>
+            %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

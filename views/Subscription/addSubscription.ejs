@@ -1,0 +1,571 @@
+<!-- <%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Subscription Plan</h3>
+  </li>
+</ul>
+<style>
+  #overlay{	
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 80%;
+    height:100%;
+    display: none;
+    background: rgba(199, 197, 197, 0.6);
+  }
+  .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+  @keyframes sp-anime {
+    100% { 
+      transform: rotate(360deg); 
+    }
+  }
+  .is-hide{
+    display:none;
+  }
+</style>
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Add a new Subscription Plan to the system.
+            </h4>
+            <br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label
+                  for="vehicleType"
+                  class="col-sm-2 col-form-label"
+                  >Vehicle Type</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    id="vehicleType"
+                    name="vehicleTypeName"
+                    class="form-control"
+                  >
+                    <option disabled selected>Select</option>
+                    <% for(var i=0;i<vehicleTypes.length;i++) { %>
+                      <option value="<%= vehicleTypes[i] %>">
+                        <%= vehicleTypes[i] %>
+                      </option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPlanName" class="col-sm-2 col-form-label"
+                  >Plan Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPlanName"
+                    name="planName"
+                    placeholder="Enter the name of a Subscription Plan"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionDescription" class="col-sm-2 col-form-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionDescription"
+                    name="description"
+                    placeholder="Enter the description for a Subscription Plan"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPrice" class="col-sm-2 col-form-label"
+                  >Amount</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPrice"
+                    name="amount"
+                    placeholder="Enter the amount for a Subscription Plan"
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Please enter amount in <b>Rupees</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPeriod" class="col-sm-2 col-form-label"
+                  >Trial Period</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPeriod"
+                    name="trialPeriod"
+                    placeholder="Enter trial period in days"
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Trial Period should be in <b>Days</b>.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-group waves-effect"
+              >
+                Add Subscription Plan
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> 
+<script>
+  
+  var $loading = $('#overlay').hide();
+  $(document)
+  .ajaxStart(function () {
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
+</script>
+<%- contentFor('BottomJs') %> -->
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Subscription Plan</h3>
+  </li>
+</ul>
+<style>
+  #overlay {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 80%;
+    height: 100%;
+    display: none;
+    background: rgba(199, 197, 197, 0.6);
+  }
+  .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+  @keyframes sp-anime {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .is-hide {
+    display: none;
+  }
+</style>
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              Add a new Subscription Plan to the system.
+            </h4>
+            <br />
+            <% include ../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="vehicleType" class="col-sm-2 col-form-label"
+                  >Vehicle Type</label
+                >
+                <div class="col-sm-10">
+                  <select
+                    id="vehicleType"
+                    name="vehicleTypeName"
+                    class="form-control"
+                  >
+                    <option disabled selected>Select</option>
+                    <% for(var i=0; i < vehicleTypes.length; i++) { %>
+                    <option value="<%= vehicleTypes[i] %>">
+                      <%= vehicleTypes[i] %>
+                    </option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionPlanName"
+                  class="col-sm-2 col-form-label"
+                  >Plan Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPlanName"
+                    name="planName"
+                    placeholder="Enter the name of a Subscription Plan"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionDescription"
+                  class="col-sm-2 col-form-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionDescription"
+                    name="description"
+                    placeholder="Enter the description for a Subscription Plan"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPrice" class="col-sm-2 col-form-label"
+                  >Amount</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPrice"
+                    name="amount"
+                    placeholder="Enter the amount for a Subscription Plan"
+                    oninput="calculateDiscount()"
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Please enter amount in <b>Rupees</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionDiscountedPrice"
+                  class="col-sm-2 col-form-label"
+                  >Discounted Price</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionDiscountedPrice"
+                    name="discountedPrice"
+                    placeholder="Enter the discounted price for a Subscription Plan"
+                    oninput="calculateDiscount()"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="subscriptionDiscountPercentage"
+                  class="col-sm-2 col-form-label"
+                  >Discount Percentage</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionDiscountPercentage"
+                    name="discountPercentage"
+                    placeholder="Discount percentage will be calculated automatically"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="subscriptionPeriod" class="col-sm-2 col-form-label"
+                  >Trial Period</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="subscriptionPeriod"
+                    name="trialPeriod"
+                    placeholder="Enter trial period in days"
+                  />
+                  <div>
+                    <small class="form-text text-muted"
+                      >Trial Period should be in <b>Days</b>.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Day Plans</label>
+                <div class="col-sm-10" id="dayPlans">
+                  <div class="input-group mb-2">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="dayPlans"
+                      placeholder="Enter a day plan"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="removePlan(this)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="addDayPlan()"
+                  >
+                    Add Day Plan
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Week Plans</label>
+                <div class="col-sm-10" id="weekPlans">
+                  <div class="input-group mb-2">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="weekPlans"
+                      placeholder="Enter a week plan"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="removePlan(this)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="addWeekPlan()"
+                  >
+                    Add Week Plan
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Month Plans</label>
+                <div class="col-sm-10" id="monthPlans">
+                  <div class="input-group mb-2">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="monthPlans"
+                      placeholder="Enter a month plan"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="removePlan(this)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="addMonthPlan()"
+                  >
+                    Add Month Plan
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-group waves-effect"
+              >
+                Add Subscription Plan
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<script>
+  var $loading = $('#overlay').hide();
+  $(document)
+    .ajaxStart(function () {
+      $loading.show();
+    })
+    .ajaxStop(function () {
+      $loading.hide();
+    });
+
+  function calculateDiscount() {
+    const amount = parseFloat(
+      document.getElementById('subscriptionPrice').value
+    );
+    const discountedPrice = parseFloat(
+      document.getElementById('subscriptionDiscountedPrice').value
+    );
+
+    if (
+      !isNaN(amount) &&
+      !isNaN(discountedPrice) &&
+      amount > 0 &&
+      discountedPrice >= 0
+    ) {
+      const discountPercentage = ((amount - discountedPrice) / amount) * 100;
+      document.getElementById('subscriptionDiscountPercentage').value =
+        discountPercentage.toFixed(2) + '%';
+    } else {
+      document.getElementById('subscriptionDiscountPercentage').value = '';
+    }
+  }
+
+  function addDayPlan() {
+    const dayPlansDiv = document.getElementById('dayPlans');
+    const newInputGroup = document.createElement('div');
+    newInputGroup.className = 'input-group mb-2';
+    newInputGroup.innerHTML = `
+        <input class="form-control" type="text" name="dayPlans[]" placeholder="Enter a day plan" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-danger" onclick="removePlan(this)">Delete</button>
+        </div>
+      `;
+    dayPlansDiv.insertBefore(newInputGroup, dayPlansDiv.lastElementChild);
+  }
+
+  function addWeekPlan() {
+    const weekPlansDiv = document.getElementById('weekPlans');
+    const newInputGroup = document.createElement('div');
+    newInputGroup.className = 'input-group mb-2';
+    newInputGroup.innerHTML = `
+        <input class="form-control" type="text" name="weekPlans[]" placeholder="Enter a week plan" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-danger" onclick="removePlan(this)">Delete</button>
+        </div>
+      `;
+    weekPlansDiv.insertBefore(newInputGroup, weekPlansDiv.lastElementChild);
+  }
+
+  function addMonthPlan() {
+    const monthPlansDiv = document.getElementById('monthPlans');
+    const newInputGroup = document.createElement('div');
+    newInputGroup.className = 'input-group mb-2';
+    newInputGroup.innerHTML = `
+        <input class="form-control" type="text" name="monthPlans[]" placeholder="Enter a month plan" />
+        <div class="input-group-append">
+          <button type="button" class="btn btn-danger" onclick="removePlan(this)">Delete</button>
+        </div>
+      `;
+    monthPlansDiv.insertBefore(newInputGroup, monthPlansDiv.lastElementChild);
+  }
+
+  function removePlan(button) {
+    const inputGroup = button.parentElement.parentElement;
+    inputGroup.remove();
+  }
+</script>
+<%- contentFor('BottomJs') %>

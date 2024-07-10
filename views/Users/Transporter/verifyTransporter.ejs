@@ -1,0 +1,708 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Verify Transporter, Driver and Vehicle</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">Transporter Details</h4>
+            <br />
+            <div class="row">
+              <div class="col-12">
+                <div class="card m-b-20">
+                  <div class="card-body">
+                    <% include ../../Partials/errorMessages %>
+                    <form method="POST" class="form-horizontal">
+                      <div class="form-group row">
+                        <label
+                          for="transporterFirstName"
+                          class="col-sm-2 col-form-label"
+                          >First Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterFirstName"
+                            name="firstname"
+                            placeholder="Enter your First Name"
+                            value="<%= transporter.transporterData.first_name %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterLastName"
+                          class="col-sm-2 col-form-label"
+                          >Last Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterLastName"
+                            name="lastname"
+                            value="<%= transporter.transporterData.last_name %>"
+                            placeholder="Enter your Last Name"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterEmail"
+                          class="col-sm-2 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterEmail"
+                            name="email"
+                            placeholder="Enter your Email"
+                            value="<%= transporter.transporterData.email %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterPhoneNumber"
+                          class="col-sm-2 col-form-label"
+                          >Phone Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterPhoneNumber"
+                            name="phone"
+                            placeholder="Enter your Phone Number"
+                            value="<%= transporter.transporterData.phone_number %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterAddress"
+                          class="col-sm-2 col-form-label"
+                          >Address</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterAddress"
+                            name="address"
+                            placeholder="Please enter your address"
+                            value="<%= transporter.transporterData.address.flat_number %>"
+                            disabled
+                          />
+                          <br />
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">Area</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="area"
+                              name="area"
+                              placeholder="Enter the area"
+                              value="<%= transporter.transporterData.address.area %>"
+                              disabled
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">City</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="city"
+                              name="city"
+                              placeholder="Enter the city"
+                              value="<%= transporter.transporterData.address.city %>"
+                              disabled
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text"
+                                >Pincode</span
+                              ></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="pincode"
+                              name="pincode"
+                              placeholder="Enter your pincode"
+                              value="<%= transporter.transporterData.address.pincode %>"
+                              disabled
+                            />
+                          </div>
+                          <br />
+                          <div
+                            class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                          >
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text">State</span></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="state"
+                              name="state"
+                              placeholder="Enter the State"
+                              value="<%= transporter.transporterData.address.state %>"
+                              disabled
+                            />
+                            &nbsp;
+                            <span
+                              class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                              ><span class="input-group-text"
+                                >Country</span
+                              ></span
+                            >
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="country"
+                              name="country"
+                              placeholder="Enter the Country"
+                              value="<%= transporter.transporterData.address.country %>"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="verifyTransporter"
+                          class="col-sm-2 col-form-label"
+                          >Verified</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="verifyTransporter" name="is_verified" <% if(
+                          transporter.transporterData.is_verified === "pending"
+                          ) { %> value="Pending" <% } else { %> value="Verified"
+                          <% } %> disabled />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterStatus"
+                          class="col-sm-2 col-form-label"
+                          >Status</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="transporterStatus" name="status" <% if(
+                          transporter.transporterData.status === true ) { %>
+                          value="Active" <% } else { %> value="In-Active" <% }
+                          %> disabled />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterIsDeleted"
+                          class="col-sm-2 col-form-label"
+                          >Deleted</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="transporterIsDeleted" name="isDeleted" <% if(
+                          transporter.transporterData.is_deleted === false ) {
+                          %> value="No" <% } else { %> value="Yes" <% } %>
+                          disabled />
+                        </div>
+                      </div>
+
+                      <% if( transporter.is_deleted === true ) { %>
+                      <div class="form-group row">
+                        <label
+                          for="transporterRemoveReason"
+                          class="col-sm-2 col-form-label"
+                          >Reason for delete a user</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="transporterRemoveReason"
+                            name="reason"
+                            placeholder="Reason for deleting the user"
+                            value="<%= transporter.transporterData.reason %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <% } %>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterIsRegistered"
+                          class="col-sm-2 col-form-label"
+                          >Registered</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="transporterIsRegistered" name="registered" <% if(
+                          transporter.transporterData.registered === true ) { %>
+                          value="Registered" <% } else { %>
+                          value="Non-Registered" <% } %> disabled />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterGstNumber"
+                          class="col-sm-2 col-form-label"
+                          >GST Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="transporterGstNumber" placeholder="Enter your GST Number" name="gstNo" <% if(
+                          transporter.transporterData.gst_number == "" ) { %>
+                          value="Not Available" <% } else { %> value="<%=
+                          transporter.transporterData.gst_number %>" <% } %> disabled />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="transporterRegisterNumber"
+                          class="col-sm-2 col-form-label"
+                          >Register Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text"
+                          id="transporterRegisterNumber" name="registerNo"
+                          placeholder="Enter your Register Number" <% if(
+                          transporter.transporterData.register_number == "" ) {
+                          %> value="Not Available" <% } else { %> value="<%=
+                          transporter.transporterData.register_number %>" <% } %> disabled />
+                        </div>
+                      </div>
+
+                      <br />
+                      <h4 class="mt-0 header-title">Driver Details</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card m-b-20">
+                            <div class="card-body">
+                              <% if( drivers.length !== 0) { %> 
+                              <!-- <div class="form-group row">
+                                <label
+                                  for="driverPhoto"
+                                  class="col-sm-2 col-form-label"
+                                  >Photo</label
+                                >
+                                <div class="col-sm-10">
+                                  <img
+                                    id="driverPhoto"
+                                    class="d-flex mr-3 thumbnail thumb-lg"
+                                    src="<%= drivers[0].driverData.driver_photo %>"
+                                    alt="Driver's image"
+                                  />
+                                </div>
+                              </div> -->
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverFirstName"
+                                  class="col-sm-2 col-form-label"
+                                  >First Name</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverFirstName"
+                                    name="FirstName"
+                                    placeholder="Enter your First Name"
+                                    value="<%= drivers[0].driverData.first_name %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverLastName"
+                                  class="col-sm-2 col-form-label"
+                                  >Last Name</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverLastName"
+                                    name="LastName"
+                                    value="<%= drivers[0].driverData.last_name %>"
+                                    placeholder="Enter your Last Name"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverEmail"
+                                  class="col-sm-2 col-form-label"
+                                  >Email</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverEmail"
+                                    name="Email"
+                                    placeholder="Enter your Email"
+                                    value="<%= drivers[0].driverData.email %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverPhoneNumber"
+                                  class="col-sm-2 col-form-label"
+                                  >Phone Number</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverPhoneNumber"
+                                    name="Phone"
+                                    placeholder="Enter your Phone Number"
+                                    value="<%= drivers[0].driverData.phone_number %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverAge"
+                                  class="col-sm-2 col-form-label"
+                                  >Age</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="driverAge"
+                                    name="Age"
+                                    placeholder="Enter your Age"
+                                    value="<%= drivers[0].driverData.age %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverStatus"
+                                  class="col-sm-2 col-form-label"
+                                  >Status</label
+                                >
+                                <div class="col-sm-10">
+                                  <input class="form-control" type="text"
+                                  id="driverStatus" name="DriverStatus" <% if(
+                                  drivers[0].driverData.status === true ) { %>
+                                  value="Active" <% } else { %>
+                                  value="In-Active" <% } %> disabled />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverIsDeleted"
+                                  class="col-sm-2 col-form-label"
+                                  >Deleted</label
+                                >
+                                <div class="col-sm-10">
+                                  <input class="form-control" type="text"
+                                  id="driverIsDeleted" name="DriverIsDeleted" <%
+                                  if( drivers[0].driverData.is_deleted === false
+                                  ) { %> value="No" <% } else { %> value="Yes"
+                                  <% } %> disabled />
+                                </div>
+                              </div>
+
+                              <!-- <div class="form-group row">
+                                <label
+                                  for="driverAddressPhoto"
+                                  class="col-sm-2 col-form-label"
+                                  >Address Proof</label
+                                >
+                                <div class="col-sm-10">
+                                  <img
+                                    class="d-flex mr-3 thumbnail thumb-lg"
+                                    src="<%= drivers[0].driverData.address_proof %>"
+                                    alt="driver address_proof"
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="driverIdentityPhoto"
+                                  class="col-sm-2 col-form-label"
+                                  >Identity Proof</label
+                                >
+                                <div class="col-sm-10">
+                                  <img
+                                    class="d-flex mr-3 thumbnail thumb-lg"
+                                    src="<%= drivers[0].driverData.identity_proof %>"
+                                    alt="driver identity_proof"
+                                  />
+                                </div>
+                              </div> -->
+
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"
+                                  >Verified</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    style="width: 30px; height: 30px"
+                                    type="hidden"
+                                    id="chbVerifyDriverHidden"
+                                    value="unchecked"
+                                    class="chb_transporterAsDriver"
+                                  />
+                                  <input
+                                    style="width: 30px; height: 30px"
+                                    type="checkbox"
+                                    id="chbVerifyDriver"
+                                    value="checked"
+                                    class="chb_transporterAsDriver"
+                                    name="verifyDriver"
+                                  />
+                                </div>
+                              </div>
+                              <% } else { %> <p>No driver found!</p>
+                                <% } %> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <br />
+
+                      <h4 class="mt-0 header-title">Vehicle Details</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card m-b-20">
+                            <div class="card-body">
+                              <% if( drivers.length !== 0) { %> 
+                              <div class="form-group row">
+                                <label
+                                  for="vehicle_type"
+                                  class="col-sm-2 col-form-label"
+                                  >Vehicle Type</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicle_type"
+                                    name="vehicleType"
+                                    placeholder="Enter your type of the Vehicle"
+                                    value="<%= vehicles[0].vehicleData.vehicle_type %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicle_number"
+                                  class="col-sm-2 col-form-label"
+                                  >Vehicle Number</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicle_number"
+                                    name="vehicleNumber"
+                                    placeholder="Enter your Vehicle Number"
+                                    value="<%= vehicles[0].vehicleData.vehicle_number %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleChassisNumber"
+                                  class="col-sm-2 col-form-label"
+                                  >Chassis Number</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    id="vehicleChassisNumber"
+                                    name="chassisNumber"
+                                    value="<%= vehicles[0].vehicleData.chassis_number %>"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleStatus"
+                                  class="col-sm-2 col-form-label"
+                                  >Status</label
+                                >
+                                <div class="col-sm-10">
+                                  <input class="form-control" type="text"
+                                  id="vehicleStatus" name="VehicleStatus" <% if(
+                                  vehicles[0].vehicleData.status === true ) { %>
+                                  value="Active" <% } else { %>
+                                  value="In-Active" <% } %> disabled />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label
+                                  for="vehicleIsDeleted"
+                                  class="col-sm-2 col-form-label"
+                                  >Deleted</label
+                                >
+                                <div class="col-sm-10">
+                                  <input class="form-control" type="text"
+                                  id="vehicleIsDeleted" name="vehicleIsDeleted"
+                                  <% if( vehicles[0].vehicleData.is_deleted ===
+                                  false ) { %> value="No" <% } else { %>
+                                  value="Yes" <% } %> disabled />
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"
+                                  >Verified</label
+                                >
+                                <div class="col-sm-10">
+                                  <input
+                                    style="width: 30px; height: 30px"
+                                    type="hidden"
+                                    id="chbVerifyVehicleHidden"
+                                    value="unchecked"
+                                    class="chb_verifyVehicle"
+                                  />
+                                  <input
+                                    style="width: 30px; height: 30px"
+                                    type="checkbox"
+                                    id="chbVerifyVehicle"
+                                    value="checked"
+                                    class="chb_verifyVehicle"
+                                    name="verifyVehicle"
+                                  />
+                                </div>
+                              </div>
+
+                              <!-- <div class="form-group row">
+                                  <label for="vehicleIcons" class="col-sm-2 col-form-label"
+                                    >Images</label
+                                  >
+                                  <div class="col-sm-10">
+                                  <% for(var i=0;i<vehicles[0].vehicleData.vehicle_photos.length;i++) { %>
+                                    <img
+                                      src="<%= vehicles[0].vehicleData.vehicle_photos[i] %>"
+                                      height="100px"
+                                      width="100px"
+                                    />&nbsp;
+                                  <% } %>
+                                  </div>
+                                </div> -->
+
+                              <!-- <% if( vehicles[0].vehicleData.is_deleted === true ) { %>
+                                  <div class="form-group row">
+                                    <label for="vehicleRemoveReason" class="col-sm-2 col-form-label"
+                                      >Reason for delete a Vehicle</label
+                                    >
+                                    <div class="col-sm-10">
+                                      <input
+                                        class="form-control"
+                                        type="text"
+                                        id="vehicleRemoveReason"
+                                        name="reason"
+                                        placeholder="Reason for deleting the vehicle"
+                                        value="<%= vehicles[0].vehicleData.reason %>"
+                                        disabled
+                                      />
+                                    </div>
+                                  </div>
+                                  <% } %> -->
+                                  <% } else { %> <p>No vehicle found!</p>
+                                    <% } %> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="submit"
+                        class="btn btn-group btn-success waves-effect"
+                      >
+                        Verify
+                      </button>
+
+                      <button
+                        id="btnCancel"
+                        name="btnCancel"
+                        type="button"
+                        class="btn btn-group btn-danger waves-effect"
+                        onclick="location.href='/dashboard'"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>

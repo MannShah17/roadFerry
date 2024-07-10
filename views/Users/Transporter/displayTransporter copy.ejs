@@ -1,0 +1,310 @@
+<%- contentFor('HeaderCss') %>
+
+<!-- DataTables -->
+<link
+  href="/assets/plugins/datatables/dataTables.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="/assets/plugins/datatables/buttons.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<!-- Responsive datatable examples -->
+<link
+  href="/assets/plugins/datatables/responsive.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Transporters</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">List of all the transporters</h4>
+            <% include ../../Partials/errorMessages %>
+            <table
+              id="datatable"
+              class="table table-bordered dt-responsive nowrap"
+              cellspacing="0"
+              width="100%"
+            >
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <!-- <th>Address</th> -->
+                  <th>Status</th>
+                  <!-- <th>Drivers/Vehicals</th> -->
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+                
+              <tbody>
+              <% for(var i=0;i<transporters.length;i++) { %>
+
+                <tr>
+                  <td><%= i+1 %></td>
+                  <td><%= transporters[i].transporterData.first_name %></td>
+                  <td><%= transporters[i].transporterData.last_name %></td>
+                  <td><%= transporters[i].transporterData.email %></td>
+                  <td><%= transporters[i].transporterData.phone_number %></td>
+                  <!-- <td><%= transporters[i].transporterData.address.flatNumber %>
+                    <br/>
+                    <%= transporters[i].transporterData.address.area %>-<%= transporters[i].transporterData.address.pincode %>
+                    <br/>
+                  <%= transporters[i].transporterData.address.city %>
+                  </td> -->
+                  <% if( transporters[i].transporterData.status === true ) { %>
+                    <td>
+                      <span data-toggle="modal" data-target="#statusModal_<%= transporters[i].id %>">
+                        <button class="btn btn-success waves-effect waves-light change_status">Active</button>
+                      </span>
+                    </td>
+                  <% } else { %>
+                    <td>
+                      <span data-toggle="modal" data-target="#statusModal_<%= transporters[i].id %>">
+                        <button class="btn btn-danger waves-effect waves-light change_status">In-Active</button>
+                      </span>
+                    </td>
+                  <% } %>
+                  <!-- <td>
+                    <button 
+                    type="button" 
+                    class="btn btn-blue-grey waves-effect waves-light m-r-5" 
+                    data-toggle="tooltip" data-original-title="Add new driver"
+                    onclick="location.href='/transporter/<%= transporters[i].id %>/createDriver'"
+                    >
+                    <i class="mdi mdi-plus "></i>
+                    Driver
+                    </button>
+                    <button 
+                    type="button" 
+                    class="btn btn-blue-grey waves-effect waves-light m-r-5" 
+                    data-toggle="tooltip" data-original-title="Add new vehicle"
+                    onclick="location.href='/transporter/<%= transporters[i].id %>/createVehicle'"
+                    >
+                    <i class="mdi mdi-plus "></i>
+                    vehicle
+                    </button>
+                </td> -->
+                  <td>
+                  <span data-toggle="modal" data-target="#removeModal_<%= transporters[i].id %>">
+                    <button 
+                    type="button" 
+                    class="btn btn-danger waves-effect waves-light m-r-5" 
+                    data-toggle="tooltip" data-original-title="Delete"
+                    >
+                    <i class="mdi mdi-delete"></i>
+                    <!-- <span> Delete </span> -->
+                    </button>
+                  </span>
+
+                    <!-- <button 
+                    type="button" 
+                    class="btn btn-warning waves-effect waves-light m-r-5"
+                    data-toggle="tooltip" data-original-title="Edit"
+                    >
+                    <i class="mdi mdi-grease-pencil"></i> -->
+                    <!-- <span> Edit </span> -->
+                    <!-- </button> -->
+                    <button 
+                    type="button" 
+                    class="btn btn-info waves-effect waves-light m-r-5" 
+                    data-toggle="tooltip" data-original-title="View"
+                    onclick="location.href='/transporter/<%= transporters[i].id %>/details'"
+                    >
+                    <i class="mdi mdi-file-document"></i>
+                    <!-- <span> View </span> -->
+                    </button>
+
+                    <% if(transporters[i].transporterData.is_verified == "pending") { %>
+                      <button 
+                      type="button" 
+                      class="btn btn-warning waves-effect waves-light m-r-5" 
+                      data-toggle="tooltip" data-original-title="Verify"
+                      onclick="location.href='/transporter/verify/<%= transporters[i].id %>'"
+                      >
+                      <!-- <i class="mdi mdi-alert-circle-check"></i> -->
+                      <span> Verify </span>
+                      </button>
+                    <% } %>
+                  </td>
+                </tr>
+                <!-- Modal For Delete -->
+              <div class="modal fade" id="removeModal_<%= transporters[i].id %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalLabel">
+                        Are you sure you want to delete this transporter?
+                      </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form role="form" id="modalForm_<%= transporters[i].id %>" class="remove_form">
+                        <div>
+                          <div class="form-group row">
+                            <label  class="col-sm-2 col-form-label"
+                              >Reason</label
+                            >
+                            <div class="col-sm-10">
+                              <input
+                                class="form-control"
+                                type="text"
+                                id="reasonForDelete_<%= transporters[i].id %>"
+                                name="reason"
+                                placeholder="Please enter the reason for deletetion."
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" id="btnModalClose_<%= transporters[i].id %>" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnDelete_<%= transporters[i].id %>" class="btn btn-danger remove-transporter">Delete</button>
+                      </div>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal For Enable/Disable -->
+              <div class="modal fade" id="statusModal_<%= transporters[i].id %>" tabindex="-1" role="dialog" aria-labelledby="modalStatusLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalStatusLabel">
+                        Are you sure you want to change transporter's status?
+                      </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form role="form" id="modalStatusForm_<%= transporters[i].id %>" class="status_form">
+                        <div>
+                          <div class="form-group row">
+                            <label  class="col-sm-2 col-form-label"
+                              >Reason</label
+                            >
+                            <div class="col-sm-10">
+                              <input
+                                class="form-control"
+                                type="text"
+                                id="statusChangeReason_<%= transporters[i].id %>"
+                                name="reason"
+                                placeholder="Please enter the reason for changing the status."
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" id="btnModalStatusClose_<%= transporters[i].id %>" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnStatusChange_<%= transporters[i].id %>" class="btn btn-warning status-transporter">Change Status</button>
+                      </div>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<!-- Required datatable js -->
+<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/assets/plugins/datatables/jszip.min.js"></script>
+<script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/assets/pages/datatables.init.js"></script>
+<script>
+  $(function () {
+    // $(document).on("click", ".status-transporter", function (e) {
+    $(".status_form").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");
+      const split_id=id.split("_")[1];
+      const data={
+        reason:$("#statusChangeReason_"+split_id).val(),
+      }
+      $.ajax({
+        url:`/transporter/status/${split_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload();
+        },
+        error:function(){
+          alert(`There is some issue to this ${split_id}`);
+        }
+      });
+    });
+
+    $(".remove_form").submit(function(e){
+      e.preventDefault();
+      const id=$(this).attr("id");  
+      const split_id=id.split("_")[1];      
+      const data={
+        reason:$("#reasonForDelete_"+split_id).val(),
+      }
+      $.ajax({
+        url:`/transporter/removeTransporter/${split_id}`,
+        type:"POST",
+        data:data,
+        success:function(){
+          location.reload(true);
+          // alert("The Record's been deleted...!!");
+        },
+        error:function(){
+          alert(`There is some issue with the delete.`);
+        }
+      });
+    });
+  });
+</script>
+<%- contentFor('BottomJs') %>

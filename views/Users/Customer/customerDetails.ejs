@@ -1,0 +1,406 @@
+<%- contentFor('HeaderCss') %>
+
+<!-- DataTables -->
+<link
+  href="/assets/plugins/datatables/dataTables.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="/assets/plugins/datatables/buttons.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<!-- Responsive datatable examples -->
+<link
+  href="/assets/plugins/datatables/responsive.bootstrap4.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Customer's Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular customer
+            </h4>
+            <br /><br />
+            <% include ../../Partials/errorMessages %>
+            <form method="POST" class="form-horizontal">
+              <div class="form-group row">
+                <label for="customerFirstName" class="col-sm-2 col-form-label"
+                  >First Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerFirstName"
+                    name="firstname"
+                    placeholder="Enter your First Name"
+                    value="<%= customer.customerData.first_name %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="customerLastName" class="col-sm-2 col-form-label"
+                  >Last Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerLastName"
+                    name="lastname"
+                    value="<%= customer.customerData.last_name %>"
+                    placeholder="Enter your Last Name"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="customerEmail" class="col-sm-2 col-form-label"
+                  >Email</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerEmail"
+                    name="email"
+                    placeholder="Enter your Email"
+                    value="<%= customer.customerData.email %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="customerPhoneNumber" class="col-sm-2 col-form-label"
+                  >Phone Number</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerPhoneNumber"
+                    name="phone"
+                    placeholder="Enter your Phone Number"
+                    value="<%= customer.customerData.phone_number %>"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="customerAddress" class="col-sm-2 col-form-label"
+                  >Address</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerAddress"
+                    name="address"
+                    placeholder="Please enter your address"
+                    value="<%= customer.customerData.address.flatNumber %>"
+                    readonly
+                  />
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Area</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="area"
+                      name="area"
+                      placeholder="Enter the area"
+                      value="<%= customer.customerData.address.area %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">City</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="city"
+                      name="city"
+                      placeholder="Enter the city"
+                      value="<%= customer.customerData.address.city %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Pincode</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="pincode"
+                      name="pincode"
+                      placeholder="Enter your pincode"
+                      value="<%= customer.customerData.address.pincode %>"
+                      readonly
+                    />
+                  </div>
+                  <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">State</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="state"
+                      name="state"
+                      placeholder="Enter the State"
+                      value="<%= customer.customerData.address.state %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Country</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="country"
+                      name="country"
+                      placeholder="Enter the Country"
+                      value="<%= customer.customerData.address.country %>"
+                      readonly
+                    />
+                  </div>
+                  <!-- <br />
+                  <div
+                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                  >
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Latitude</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="latitude"
+                      name="latitude"
+                      value="<%= customer.customerData.address.latitude %>"
+                      readonly
+                    />
+                    &nbsp;
+                    <span
+                      class="input-group-addon bootstrap-touchspin-prefix input-group-prepend"
+                      ><span class="input-group-text">Longitude</span></span
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="longitude"
+                      name="longitude"
+                      value="<%= customer.customerData.address.longitude %>"
+                      readonly
+                    />
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="customerStatus" class="col-sm-2 col-form-label"
+                  >Status</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="customerStatus"
+                  name="status" <% if( customer.customerData.status === true ) {
+                  %> value="Active" <% } else { %> value="In-Active" <% } %>
+                  readonly />
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <label for="customerIsDeleted" class="col-sm-2 col-form-label"
+                  >Deleted</label
+                >
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" id="customerIsDeleted"
+                  name="isDeleted" <% if( customer.customerData.is_deleted === false ) { %>
+                  value="No" <% } else { %> value="Yes" <% } %> readonly />
+                </div>
+              </div> -->
+
+              <!-- <% if( customer.customerData.is_deleted === true ) { %>
+              <div class="form-group row">
+                <label
+                  for="customerRemoveReason"
+                  class="col-sm-2 col-form-label"
+                  >Reason for delete a user</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="customerRemoveReason"
+                    name="reason"
+                    placeholder="Reason for deleting the user"
+                    value="<%= customer.customerData.reason %>"
+                    readonly
+                  />
+                </div>
+              </div>
+              <% } %> -->
+
+              <!-- Tabs -->
+              <div class="form-group row">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      data-toggle="tab"
+                      href="#OrderList"
+                      role="tab"
+                    >
+                      <span>Orders</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tab-content">
+                <div class="tab-pane active p-3" id="OrderList" role="tabpanel">
+                  <!-- <p>I am in Order Tab</p> -->
+                  <div class="tab-pane p-3" id="OrderList" role="tabpanel">
+                    <!-- <p>I am in Order Tab</p> -->
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card m-b-20">
+                          <div class="card-body">
+                            <h4 class="mt-0 header-title">List of all the Orders</h4>
+                            <% include ../../Partials/errorMessages %>
+                            <table
+                              id="datatable"
+                              class="table table-bordered dt-responsive nowrap"
+                              cellspacing="0"
+                              width="100%"
+                            >
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Order ID</th>
+                                  <th>Vehicle Type</th>
+                                  <th>Price</th>
+                                  <th>Requested User</th>
+                                  <th>Status</th>
+                                  <th>Actions</th>
+                                </tr>
+                              </thead>
+                
+                              <tbody>
+                                <% for(var i=0;i<orders.length;i++) { %>
+                                <tr>
+                                  <td><%= i+1 %></td>
+                                  <td><%= orders[i].orderData.order_id %></td>
+                                  <td><%= orders[i].orderData.vehicle_type %></td>
+                                  <td><%= orders[i].orderData.price %></td>
+                                  <td><%= orders[i].orderData.requested_uid %></td>
+                                  <td><%= orders[i].orderData.status %></td>
+                                  <td style="text-align: center;">
+                                    <button 
+                                    type="button"
+                                    class="btn btn-info waves-effect waves-light m-r-5" 
+                                    data-toggle="tooltip" data-original-title="View"
+                                    onclick="location.href='/order/<%= orders[i].id %>/details'"
+                                    >
+                                    <i class="mdi mdi-file-document"></i>
+                                    <!-- <span> View </span> -->
+                                    </button>
+                                  </td>
+                                </tr>
+                              <% } %>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary btn-group waves-effect"
+                onclick="location.href='/customer/list'"
+              >
+                Back
+              </button>
+
+              <!-- <button
+                id="btnCancel"
+                name="btnCancel"
+                type="button"
+                class="btn btn-danger btn-group waves-effect"
+                onclick="location.href='/dashboard'"
+              >
+                Cancel
+              </button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<!-- Required datatable js -->
+<script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/assets/plugins/datatables/jszip.min.js"></script>
+<script src="/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="/assets/plugins/datatables/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="/assets/pages/datatables.init.js"></script>
+
+<%- contentFor('BottomJs') %>

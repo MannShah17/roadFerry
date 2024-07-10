@@ -1,0 +1,51 @@
+<%- contentFor('HeaderCss') %> <%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Errors</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <% if(typeof errors != 'undefined') { %> <%
+            errors.forEach(function(error) { %>
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <%= error.msg %>
+              <!-- <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              ></button> -->
+            </div>
+            <% }) %> <% } %>
+            <!-- <% include ../Partials/errorMessages %> -->
+            <br />
+            <button
+              class="btn btn-primary"
+              type="button"
+              onclick="window.history.back()"
+            >
+              Go back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> <%- contentFor('BottomJs') %>
