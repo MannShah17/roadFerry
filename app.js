@@ -23,6 +23,7 @@ var orderRouter = require('./routes/orderRouter');
 var contactRouter = require('./routes/contactRouter');
 var Auth2router = require('./routes/auth2router');
 var transactionRouter= require('./routes/transactionRouter')
+var priceEstimationRouter= require('./routes/priceEstimation_website')
 // var passwordRouter = require("./routes/passwordRouter");
 
 var loginRouter = require('./routes/loginRouter');
@@ -80,6 +81,7 @@ app.use('/order', orderRouter);
 app.use('/contact', contactRouter);
 app.use('/auth', Auth2router);
 app.use('/transaction', transactionRouter)
+app.use('/price', priceEstimationRouter)
 // app.use("/password", passwordRouter);
 
 //app.use("/register",loginRouter);
