@@ -47,11 +47,11 @@ exports.validateSubscriptionData = (data) => {
   if (!isNumeric(data.amount)) {
     errors.push({ msg: 'Subscription amount should be in numbers only.' });
   }
-  if (!isNumeric(data.trialPeriod)) {
-    errors.push({
-      msg: 'Subscription trial period should be in numbers only.',
-    });
-  }
+  // if (!isNumeric(data.trialPeriod)) {
+  //   errors.push({
+  //     msg: 'Subscription trial period should be in numbers only.',
+  //   });
+  // }
 
   return {
     errors,

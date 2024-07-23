@@ -14,7 +14,7 @@ exports.addSubscription = async (req, res) => {
       vehicleTypes: vehicleTypes,
       amount: 0,
       discountedPrice: 0,
-      dayPlans: [],
+      dayPlans: 0,
       weekPlans: [],
       monthPlans: [],
     });
@@ -26,7 +26,7 @@ exports.addSubscription = async (req, res) => {
       vehicleTypes: vehicleTypes,
       amount: 0,
       discountedPrice: 0,
-      dayPlans: [],
+      dayPlans: 0,
       weekPlans: [],
       monthPlans: [],
     });
@@ -40,9 +40,11 @@ exports.addedSubscription = async (req, res) => {
   vehicleTypeData.forEach((doc) => {
     vehicleTypes.push(doc.data().vehicle_type);
   });
+
   try {
     console.log('YOU ADDED NEW PLAN');
     const data = req.body;
+    console.log(data)
 
     const { valid, errors } = validateSubscriptionData(data);
 
@@ -52,13 +54,20 @@ exports.addedSubscription = async (req, res) => {
         errors,
         dayPlans: data.dayPlans || [],
         weekPlans: data.weekPlans || [],
-        monthPlans: data.monthPlans || [],
+        monthPlans: data.monthPlans || []
       });
     }
 
     const amount = parseFloat(data.amount);
     const discountedPrice = parseFloat(data.discountedPrice);
     const discountPercentage = ((amount - discountedPrice) / amount) * 100;
+    const dayPlans = parseInt(data.dayPlans);
+    const weekPlans = parseInt(data.weekPlans);
+    const monthPlans = parseInt(data.monthPlans);
+
+    console.log(dayPlans);
+    console.log(weekPlans);
+    console.log(monthPlans);
 
     const subscriptionData = {
       vehicle_type: data.vehicleTypeName,
@@ -68,9 +77,10 @@ exports.addedSubscription = async (req, res) => {
       discounted_price: discountedPrice,
       discount_percentage: discountPercentage,
       trial_period: data.trialPeriod,
-      day_plans: data.dayPlans || [],
-      week_plans: data.weekPlans || [],
-      month_plans: data.monthPlans || [],
+      day_plans: dayPlans || 0,
+      week_plans: weekPlans || 0,
+      month_plans: monthPlans || 0,
+      status: data.planStatus,
       created_at: new Date(),
       is_deleted: false,
     };
@@ -88,12 +98,13 @@ exports.addedSubscription = async (req, res) => {
     return res.render('Subscription/addSubscription', {
       vehicleTypes: vehicleTypes,
       errors,
-      dayPlans: data.dayPlans || [],
-      weekPlans: data.weekPlans || [],
-      monthPlans: data.monthPlans || [],
+      // dayPlans: data.dayPlans || [],
+      // weekPlans: data.weekPlans || [],
+      // monthPlans: data.monthPlans || []
     });
   }
 };
+
 
 // Get all subsctiptions controller
 exports.listSubscriptions = async (req, res) => {
@@ -125,13 +136,10 @@ exports.listSubscriptions = async (req, res) => {
 exports.removeSubscription = async (req, res) => {
   try {
     const id = req.params.subscription_id;
-    // console.log("*****ID*****", id);
 
     let getSubscriptionById = await db.collection('subscription_plan').doc(id);
     let subscription = await getSubscriptionById.get();
     let subscriptionData = await subscription.data();
-
-    // console.log("DATA********", subscriptionData);
 
     if (!subscriptionData) {
       errors.push({ msg: 'There are no data available' });
@@ -147,8 +155,6 @@ exports.removeSubscription = async (req, res) => {
       deleted_at: new Date(),
     };
 
-    // console.log("DELETED DATA********", deletedData);
-
     await getSubscriptionById.update({ is_deleted: true });
 
     await db.collection('deletion_logs').add(deletedData);
@@ -156,9 +162,6 @@ exports.removeSubscription = async (req, res) => {
     return res.redirect('back');
   } catch (error) {
     console.log(error);
-    // const errors = [];
-    // errors.push({ msg: error.message });
-    // return res.render("Subscription/displaySubscriptions", { errors: errors });
   }
 };
 
@@ -211,10 +214,8 @@ exports.updateSubscription = async (req, res) => {
 exports.updatedSubscription = async (req, res) => {
   try {
     const id = req.params.subscription_id;
-    // console.log("*****ID*****", id);
 
     const data = req.body;
-    // console.log("*****DATA*****", data);
 
     const { valid, errors } = validateSubscriptionData(data);
 
@@ -230,6 +231,9 @@ exports.updatedSubscription = async (req, res) => {
     const amount = parseFloat(data.amount);
     const discountedPrice = parseFloat(data.discountedPrice);
     const discountPercentage = ((amount - discountedPrice) / amount) * 100;
+    const dayPlans = parseInt(data.dayPlans);
+    const weekPlans = parseInt(data.weekPlans);
+    const monthPlans = parseInt(data.monthPlans);
 
     const subscriptionData = {
       plan_name: data.planName,
@@ -238,6 +242,10 @@ exports.updatedSubscription = async (req, res) => {
       discounted_price: discountedPrice,
       discount_percentage: discountPercentage,
       trial_period: data.trialPeriod,
+      day_plans: dayPlans || 0,
+      week_plans: weekPlans || 0,
+      month_plans: monthPlans || 0,
+      status: data.planStatus,
     };
 
     const newSubscription = await db.collection('subscription_plan').doc(id);

@@ -49,91 +49,72 @@ exports.newVehicleType = async (req, res) => {
   try {
     const data = req.body;
 
-    // console.log("*****DATA*****", data);
-
     const { valid, errors } = validateVehicleTypeData(data);
 
     if (!valid) {
       return res.render("VehicleType/addVehicleType", { errors });
     }
-    // let start = [] ;
-    // let end = [];
-    // for (var i=0; i<= data.kmFrom.length; i++){
-      
-    //   start.push(data.kmFrom[i])
-    // }
-    // for (var i=0; i<= data.kmTo.length; i++){
-      
-    //   end.push(data.kmTo[i])
-    // }
-    // for(var i=0; i<=start.length-2; i++){
-    //   if(Number(start[i]) > Number(end[i])){
-    //     const error = "Please Check kilo meter"
-    //     req.flash("error_msg", error);
-    //       return res.redirect(`/vehicle-type/addVehicleType`);
-    //   }else{
-    //     console.log("1")
-    //   }
-    // }
+
     const rates = await vehicleRates(data.kmFrom, data.kmTo, data.price);
 
-  let Totals =[];
-      for(var j = 0; j < rates.length; j++){
-        let totalrate =0
-        totalrate = totalrate +(rates[j].end-rates[j].start)*rates[j].rate;
-        Totals.push(totalrate);
-      }
-  let sum = 0;
+    let Totals = [];
+    for (var j = 0; j < rates.length; j++) {
+      let totalrate = 0;
+      totalrate = totalrate + (rates[j].end - rates[j].start) * rates[j].rate;
+      Totals.push(totalrate);
+    }
+
+    let sum = 0;
     for (let k = 0; k < Totals.length; k++) {
       sum += Totals[k];
     }
-  const TotalBill =   sum + Number.parseInt(data.minimumRate);
-    // console.log(TotalBill,"Total mali gayu");
 
-      const iconId = uuidv4();
-      let base64 = req.files[0].buffer.toString("base64");
-      let mimetype = req.files[0].mimetype;
-      const nameArr = req.files[0].originalname;
-      const fileLocation = `vehicle-types/${iconId}`
-      const file = bucket.file(fileLocation)
-      await file.save(req.files[0].buffer, { contentType: mimetype })
-      await file.setMetadata({
-        firebaseStorageDownloadTokens: iconId
-      })
-      
-      const icons = 
-        `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileLocation)}?alt=media&token=${iconId}`
-      ;
+    const TotalBill = sum + Number.parseInt(data.minimumRate);
 
-    let start = [] ;
+    const iconId = uuidv4();
+    let base64 = req.files[0].buffer.toString("base64");
+    let mimetype = req.files[0].mimetype;
+    const nameArr = req.files[0].originalname;
+    const fileLocation = `vehicle-types/${iconId}`;
+    const file = bucket.file(fileLocation);
+    await file.save(req.files[0].buffer, { contentType: mimetype });
+    await file.setMetadata({
+      firebaseStorageDownloadTokens: iconId,
+    });
+
+    const icons = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(fileLocation)}?alt=media&token=${iconId}`;
+
+    let start = [];
     let end = [];
-    for (var i=0; i<= data.kmFrom.length; i++){
-      
-      start.push(data.kmFrom[i])
+    for (var i = 0; i < data.kmFrom.length; i++) {
+      start.push(data.kmFrom[i]);
     }
-    for (var i=0; i<= data.kmTo.length; i++){
-      
-      end.push(data.kmTo[i])
+    for (var i = 0; i < data.kmTo.length; i++) {
+      end.push(data.kmTo[i]);
     }
-    // console.log(start)
-    // console.log(end.length)
+
+    // To check a radius
+    const radius = Number(data.radius);
+    if (isNaN(radius) || radius <= 0) {
+      errors.push({ msg: "Invalid radius value" });
+      return res.render("VehicleType/addVehicleType", { errors });
+    }
 
     const vehicleData = {
       vehicle_type: data.name,
-      vahicle_capacity: data.capacity,
+      vehicle_capacity: data.capacity,
       dimensions: {
         v_length: data.vehicleLength,
         v_width: data.vehicleWidth,
         v_height: data.vehicleHeight,
       },
-      minimumRate:data.minimumRate,
+      radius: radius, // Add radius to the vehicle data
+      minimumRate: data.minimumRate,
       rates: rates,
       icon: icons,
       is_deleted: false,
-      created_at:new Date(),
+      created_at: new Date(),
     };
-
-    // console.log("*****VEHICLE DATA*****", vehicleData);
 
     const newVehicle = await db.collection("vehicles").doc();
     await newVehicle.set(vehicleData);
@@ -146,6 +127,7 @@ exports.newVehicleType = async (req, res) => {
     });
   }
 };
+
 
 /* Get List of all the Vehicle Types Controller */
 exports.listVehicleTypes = async (req, res) => {
@@ -331,6 +313,7 @@ exports.updatedVehicleType = async (req, res) => {
       vehicle_type: data.name,
       vahicle_capacity: data.capacity,
       minimumRate:data.minimumRate,
+      vehicleRadius:data.vehicleRadius,
       dimensions: {
         v_length: data.vehicleLength,
         v_width: data.vehicleWidth,
@@ -345,9 +328,6 @@ exports.updatedVehicleType = async (req, res) => {
     const newVehicle = db.collection("vehicles").doc(id);
     await newVehicle.update(vehicleData);
     return res.redirect("/vehicle-type/list");
-    // return res.render("VehicleType/displayVehicleTypes", {
-    //   message: "Vehicle is Added...!!",
-    // });
   } catch (error) {
     const errors = [];
     errors.push({ msg: error.code });

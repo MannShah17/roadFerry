@@ -1,0 +1,61 @@
+<%- contentFor('HeaderCss') %> 
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+  <li class="list-inline-item">
+    <button type="button" class="button-menu-mobile open-left waves-effect">
+      <i class="ion-navicon"></i>
+    </button>
+  </li>
+  <li class="hide-phone list-inline-item app-search">
+    <h3 class="page-title">Transaction Details</h3>
+  </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card m-b-20">
+          <div class="card-body">
+            <h4 class="mt-0 header-title">
+              See all the details of a particular transaction
+            </h4>
+            <br />
+            <% include ../Partials/errorMessages %>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% transactions.forEach(transaction => { %>
+                  <tr>
+                    <td><%= transaction.id %></td>
+                    <td><%= transaction.amount %></td>
+                    <td><%= new Date(transaction.date).toLocaleString() %></td>
+                    <td><a href="/transaction/single/<%= transaction.userId %>/<%= transaction.walletId %>/<%= transaction.id %>">View Details</a></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            <button
+              type="button"
+              class="btn btn-primary btn-group waves-effect"
+              onclick="location.href='/transaction/getTransaction'"
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- contentFor('FooterJs') %> 
+<%- contentFor('BottomJs') %>

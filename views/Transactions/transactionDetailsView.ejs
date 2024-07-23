@@ -1,0 +1,84 @@
+<%- contentFor('HeaderCss') %> 
+<%- contentFor('breadcrumb') %>
+<ul class="list-inline menu-left mb-0">
+    <li class="list-inline-item">
+        <button type="button" class="button-menu-mobile open-left waves-effect">
+            <i class="ion-navicon"></i>
+        </button>
+    </li>
+    <li class="hide-phone list-inline-item app-search">
+        <h3 class="page-title">Transaction Details</h3>
+    </li>
+</ul>
+
+<%- contentFor('body') %>
+<div class="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-20">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">
+                            See all the details of a particular Transaction
+                        </h4>
+                        <br />
+                        <% include ../Partials/errorMessages %>
+                        <form method="POST" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="transactionId" class="col-sm-2 col-form-label">Transaction ID</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="transactionId" name="transactionId" value="<%= transaction.id %>" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transactionAmount" class="col-sm-2 col-form-label">Amount</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="transactionAmount" name="amount" value="<%= transaction.amount %>" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transactionDate" class="col-sm-2 col-form-label">Date</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="transactionDate" name="date" value="<%= new Date(transaction.date).toLocaleString() %>" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transactionDetails" class="col-sm-2 col-form-label">Details</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="transactionDetails" name="details" readonly><%= transaction.details %></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transactionStatus" class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="transactionStatus" name="status" readonly><%= transaction.status %></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transactionType" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <% let typeClass = ''; %>
+                                    <% if (transaction.type === 'addition') { typeClass = 'text-success'; } %>
+                                    <% if (transaction.type === 'withdrawal') { typeClass = 'text-danger'; } %>
+                                    <% if (transaction.type === 'refund') { typeClass = 'text-warning'; } %>
+                                    <% if (transaction.type === 'referral') { typeClass = 'text-info'; } %>
+                                    <textarea class="form-control <%= typeClass %>" id="transactionType" name="type" readonly><%= transaction.type %></textarea>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-group waves-effect" onclick="location.href='/transaction/getTransaction'">Back</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('FooterJs') %>
+<%- contentFor('BottomJs') %>
