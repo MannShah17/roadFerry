@@ -48,7 +48,7 @@ const fetchDistanceBetweenPoints = async (lat1, lng1, lat2, lng2, selectedVehicl
       return finalPrice;
     } catch (error) {
       console.log('Problem occurred: ', error);
-      throw error; // Re-throw the error to be handled by the caller
+      throw error;
     }
   };
 
