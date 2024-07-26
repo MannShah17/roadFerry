@@ -17,8 +17,8 @@ const { apiKey } = require('../../config/config');
 
 const fetchDistanceBetweenPoints = async (lat1, lng1, lat2, lng2, selectedVehicleData) => {
     // google api to fetch distance between source and destination
-    const apiKey='YAIzaSyCItzj5w3MbKo3zTyY0i4K6fPvbUYGNN-4';
-    const urlToFetchDistance = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${lat1},${lng1}&destinations=${lat2},${lng2}&key=${apiKey}`;
+    const apiKey='AIzaSyCItzj5w3MbKo3zTyY0i4K6fPvbUYGNN-4';
+    const urlToFetchDistance = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${lat1},${lng1}&destinations=${lat2}%2C${lng2}&key=${apiKey}`;
     console.log(`urlToFetchDistance: ${urlToFetchDistance}`);
     
     try {
