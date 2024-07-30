@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const fetchDistanceBetweenPoints = async (lat1, lng1, lat2, lng2) => {
   const apiKey = 'AIzaSyCItzj5w3MbKo3zTyY0i4K6fPvbUYGNN-4';
   const urlToFetchDistance = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${lat1},${lng1}&destinations=${lat2}%2C${lng2}&key=${apiKey}`;
-  console.log(`urlToFetchDistance: ${urlToFetchDistance}`);
+  console.log(`urlToFetchDistance(changes): ${urlToFetchDistance}`);
   
   try {
     const response = await fetch(urlToFetchDistance);
